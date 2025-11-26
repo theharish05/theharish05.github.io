@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARISH / MADIZEN - Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap" rel="stylesheet">
+
+    <!-- Custom Config & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            green: '#00ff41',  /* Classic Terminal Green */
+                            dark: '#050505',   /* Deep Black */
+                            card: '#111111',   /* Dark Gray */
+                            text: '#cccccc',   /* Light Gray */
+                            accent: '#008F11'  /* Darker Green */
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['"Space Mono"', 'monospace'],
+                        pixel: ['"VT323"', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slight': 'bounceSlight 2s infinite',
+                        'blink': 'blink 1s step-end infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        bounceSlight: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Space Mono', monospace; 
+            background-color: #050505;
+            color: #cccccc;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #00ff41; border-radius: 0; }
+        ::-webkit-scrollbar-thumb:hover { background: #00cc33; }
+
+        /* Matrix Canvas Background */
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.25; /* Increased opacity for better visibility */
+        }
+
+        /* Grid Background Pattern */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        /* Scanline Overlay */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Glitch Text */
+        .glitch {
+            position: relative;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050505;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 #008F11;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 #00ff41;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 30px, 0); }
+            20% { clip: rect(80px, 9999px, 100px, 0); }
+            40% { clip: rect(10px, 9999px, 40px, 0); }
+            60% { clip: rect(50px, 9999px, 70px, 0); }
+            80% { clip: rect(20px, 9999px, 50px, 0); }
+            100% { clip: rect(90px, 9999px, 110px, 0); }
+        }
+
+        /* Page Transitions */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-item.active {
+            color: #00ff41;
+            border-bottom: 2px solid #00ff41;
+            box-shadow: 0 4px 6px -1px rgba(0, 255, 65, 0.1);
+        }
+
+        /* Cat Animation CSS */
+        .cat-ear { transition: transform 0.2s; }
+        .cyber-cat:hover .cat-ear.left { transform: rotate(-10deg); }
+        .cyber-cat:hover .cat-ear.right { transform: rotate(10deg); }
+        
+        /* Terminal Cursor */
+        .cursor::after {
+            content: '█';
+            animation: blink 1s step-end infinite;
+            color: #00ff41;
+            margin-left: 2px;
+        }
+    </style>
+</head>
+<body class="bg-cyber-dark text-cyber-text min-h-screen selection:bg-cyber-green selection:text-black">
+
+    <!-- Background Animation Canvas -->
+    <canvas id="matrixCanvas"></canvas>
+    
+    <!-- Static Grid Background -->
+    <div class="cyber-grid"></div>
+
+    <!-- Scanline Overlay -->
+    <div class="scanline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-cyber-dark/90 backdrop-blur-md border-b border-cyber-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="showPage('home')">
+                    <span class="text-2xl font-pixel font-bold text-cyber-green tracking-widest flex items-center gap-2 hover:text-white transition-colors">
+                        <i data-lucide="terminal" class="w-6 h-6"></i> ~/HOME
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <button onclick="showPage('home')" class="nav-item px-3 py-2 rounded-md text-sm font-medium hover:text-cyber-green transition-colors active">Home</button>
+                        <button onclick="showPage('about')" class="nav-item px-3 py-2 rounded-md text-sm font-medium hover:text-cyber-green transition-colors">About</button>
+                        <button onclick="showPage('skills')" class="nav-item px-3 py-2 rounded-md text-sm font-medium hover:text-cyber-green transition-colors">Skills</button>
+                        <button onclick="showPage('projects')" class="nav-item px-3 py-2 rounded-md text-sm font-medium hover:text-cyber-green transition-colors">Projects</button>
+                        <button onclick="showPage('experience')" class="nav-item px-3 py-2 rounded-md text-sm font-medium hover:text-cyber-green transition-colors">Exp</button>
+                        <button onclick="showPage('achievements')" class="nav-item px-3 py-2 rounded-md text-sm font-medium hover:text-cyber-green transition-colors">CTF</button>
+                        <button onclick="showPage('writeups')" class="nav-item px-3 py-2 rounded-md text-sm font-medium hover:text-cyber-green transition-colors">Writeups</button>
+                        <button onclick="showPage('certs')" class="nav-item px-3 py-2 rounded-md text-sm font-medium hover:text-cyber-green transition-colors">Certs</button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-cyber-green hover:text-white hover:bg-cyber-green/20 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-card border-b border-cyber-green/20">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onclick="showPage('home')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-cyber-green hover:bg-cyber-dark">Home</button>
+                <button onclick="showPage('about')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-green hover:bg-cyber-dark">About</button>
+                <button onclick="showPage('skills')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-green hover:bg-cyber-dark">Skills</button>
+                <button onclick="showPage('projects')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-green hover:bg-cyber-dark">Projects</button>
+                <button onclick="showPage('experience')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-green hover:bg-cyber-dark">Experience</button>
+                <button onclick="showPage('achievements')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-green hover:bg-cyber-dark">CTF</button>
+                <button onclick="showPage('writeups')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-cyber-green hover:bg-cyber-dark">Writeups</button>
+                <button onclick="showPage('certs')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyber-green hover:bg-cyber-dark">Certs</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 min-h-screen flex flex-col justify-center">
+
+        <!-- HOME PAGE -->
+        <div id="home" class="page-section active">
+            <div class="flex flex-col items-center justify-center text-center min-h-[70vh]">
+                <!-- Cyber Cat Mascot -->
+                <div class="cyber-cat relative mb-8 animate-float cursor-pointer group" onclick="meow()">
+                    <div class="relative w-40 h-40 bg-cyber-card/80 backdrop-blur rounded-full border-4 border-cyber-green flex items-center justify-center shadow-[0_0_30px_#00ff41]">
+                        <i data-lucide="cat" class="w-24 h-24 text-cyber-green"></i>
+                        <!-- Eyes Overlay for animation -->
+                        <div class="absolute top-[45px] left-[45px] w-2 h-2 bg-black rounded-full animate-blink"></div>
+                        <div class="absolute top-[45px] right-[45px] w-2 h-2 bg-black rounded-full animate-blink"></div>
+                    </div>
+                    <!-- Speech Bubble -->
+                    <div class="absolute -top-12 -right-12 bg-white text-black px-4 py-2 rounded-xl font-bold font-pixel text-lg animate-bounce-slight opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Meow! I'm Madizen.
+                    </div>
+                </div>
+
+                <div class="glitch-wrapper mb-4 h-24">
+                    <!-- Dynamic Name Container with Glitch -->
+                    <h1 id="heroName" class="glitch text-5xl md:text-8xl font-bold text-white font-pixel tracking-wider" data-text="HARISH">HARISH</h1>
+                </div>
+                
+                <p class="text-xl md:text-2xl text-cyber-green font-mono mb-8 cursor">
+                    Ethical Hacker | Security Researcher
+                </p>
+
+                <div class="flex gap-4 mt-4">
+                    <a href="https://github.com/theharish05/" target="_blank" class="p-3 border border-cyber-green bg-cyber-green/10 rounded hover:bg-cyber-green hover:text-black transition-all transform hover:scale-110">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/m-harish-318068286" target="_blank" class="p-3 border border-cyber-green bg-cyber-green/10 rounded hover:bg-cyber-green hover:text-black transition-all transform hover:scale-110">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    </a>
+                    <a href="mailto:m.harish17122005@gmail.com" class="p-3 border border-cyber-green bg-cyber-green/10 rounded hover:bg-cyber-green hover:text-black transition-all transform hover:scale-110">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="about" class="page-section">
+            <h2 class="text-3xl font-pixel text-cyber-green mb-8 flex items-center gap-3">
+                <i data-lucide="user" class="w-8 h-8"></i> > WHOAMI
+            </h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-lg bg-cyber-card/80 p-6 rounded-lg border border-cyber-green/20 backdrop-blur-sm shadow-[0_0_15px_rgba(0,255,65,0.05)]">
+                    <p class="leading-relaxed text-gray-300">
+                        I am a Cybersecurity student with a strong interest in <span class="text-cyber-green font-bold">ethical hacking</span>, <span class="text-cyber-green font-bold">vulnerability assessment</span>, and <span class="text-cyber-green font-bold">security research</span>. I enjoy learning new tools and working on hands-on projects, and I am eager to apply my skills in real-world cybersecurity roles while continuing to grow my knowledge.
+                    </p>
+                    
+                    <div class="bg-black/50 p-4 border-l-4 border-cyber-green font-mono text-sm">
+                        <span class="text-cyber-green">root@madizen:~$</span> cat interests.txt<br>
+                        - Ethical Hacking<br>
+                        - Reverse Engineering<br>
+                        - Vulnerability Assessment<br>
+                        - Photography 📸<br>
+                        - Meowing at cats 🐱
+                    </div>
+                </div>
+                <!-- ASCII Art Area -->
+                <div class="bg-black/80 p-6 rounded border border-cyber-green/30 font-mono text-xs md:text-sm text-cyber-green overflow-hidden whitespace-pre shadow-lg relative">
+                    <div class="absolute top-2 right-2 flex gap-1">
+                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                        <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                        <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                    </div>
+      |\      _,,,---,,_
+ZZZzz /,`.-'`'    -.  ;-;;,_
+     |,4-  ) )-,_. ,\ (  `'-'
+    '---''(_/--'  `-'\_)  
+    
+    // IDENTITY: MADIZEN
+    // STATUS: ENUMERATING...
+    // TARGET: KNOWLEDGE
+                </div>
+            </div>
+        </div>
+
+        <!-- SKILLS PAGE -->
+        <div id="skills" class="page-section">
+            <h2 class="text-3xl font-pixel text-cyber-green mb-8 flex items-center gap-3">
+                <i data-lucide="cpu" class="w-8 h-8"></i> > SKILL_TREE
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Skill Card Template -->
+                <div class="bg-cyber-card/80 backdrop-blur p-6 rounded border border-cyber-green/20 hover:border-cyber-green transition-all hover:-translate-y-2 group">
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-cyber-green flex items-center gap-2">
+                        <i data-lucide="code" class="w-5 h-5"></i> Languages
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
+                </div>
+                
+                <div class="bg-cyber-card/80 backdrop-blur p-6 rounded border border-cyber-green/20 hover:border-cyber-green transition-all hover:-translate-y-2 group">
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-cyber-green flex items-center gap-2">
+                        <i data-lucide="wrench" class="w-5 h-5"></i> Tools
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">Burp Suite</span>
+                        <span class="skill-tag">Nmap</span>
+                        <span class="skill-tag">Metasploit</span>
+                        <span class="skill-tag">Wireshark</span>
+                        <span class="skill-tag">Ghidra</span>
+                        <span class="skill-tag">Nessus</span>
+                        <span class="skill-tag">Hydra</span>
+                        <span class="skill-tag">Nikto</span>
+                    </div>
+                </div>
+
+                <div class="bg-cyber-card/80 backdrop-blur p-6 rounded border border-cyber-green/20 hover:border-cyber-green transition-all hover:-translate-y-2 group">
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-cyber-green flex items-center gap-2">
+                        <i data-lucide="server" class="w-5 h-5"></i> Technologies/Framework
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Metasploit</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Mongo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS PAGE -->
+        <div id="projects" class="page-section">
+            <h2 class="text-3xl font-pixel text-cyber-green mb-8 flex items-center gap-3">
+                <i data-lucide="folder-open" class="w-8 h-8"></i> > REPOSITORIES
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-cyber-card/90 backdrop-blur p-8 rounded border-t-4 border-cyber-green relative overflow-hidden group hover:shadow-[0_0_15px_rgba(0,255,65,0.2)] transition-all">
+                    <div class="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="binary" class="w-12 h-12 text-cyber-green"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-cyber-green">Agentless Vulnerability Scanner</h3>
+                    <p class="text-sm font-mono text-gray-500 mb-4">Python • PySide6 • Nmap</p>
+                    <p class="text-gray-400 mb-6">Designed and developed a Python-based agentless scanner with a custom GUI. Automates CVE lookup using NVD API. No client install needed!</p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/theharish05/Agentless-Vulnerability-Scanner-For-Windows" target="_blank" class="text-cyber-green hover:underline flex items-center gap-1">
+                            View Code <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-cyber-card/90 backdrop-blur p-8 rounded border-t-4 border-cyber-green relative overflow-hidden group hover:shadow-[0_0_15px_rgba(0,255,65,0.2)] transition-all">
+                    <div class="absolute top-0 right-0 p-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="shield-alert" class="w-12 h-12 text-cyber-green"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-cyber-green">Intrusion Detection System</h3>
+                    <p class="text-sm font-mono text-gray-500 mb-4">Python • Flask • Scapy</p>
+                    <p class="text-gray-400 mb-6">Real-time threat detection system with automated email alerts and a web dashboard. Uses Scapy for deep packet inspection.</p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/Kira-007/Intrusion-Detection-System" target="_blank" class="text-cyber-green hover:underline flex items-center gap-1">
+                            View Code <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPERIENCE PAGE -->
+        <div id="experience" class="page-section">
+            <h2 class="text-3xl font-pixel text-cyber-green mb-8 flex items-center gap-3">
+                <i data-lucide="briefcase" class="w-8 h-8"></i> > /var/log/jobs
+            </h2>
+            <div class="relative border-l-2 border-cyber-green/30 ml-4 space-y-12">
+                <div class="relative pl-8">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-cyber-dark border-2 border-cyber-green rounded-full animate-pulse-slow"></div>
+                    <div class="bg-cyber-card/80 backdrop-blur p-6 rounded border border-cyber-green/10 hover:border-cyber-green/50 transition-colors">
+                        <div class="flex flex-col sm:flex-row justify-between mb-4">
+                            <h3 class="text-xl font-bold text-white">Cybersecurity Intern</h3>
+                            <span class="text-cyber-green font-mono text-sm bg-cyber-green/10 px-2 py-1 rounded">May 2024</span>
+                        </div>
+                        <h4 class="text-lg text-gray-400 mb-4">@ Shadow Fox</h4>
+                        <ul class="space-y-2 text-gray-300 list-disc list-inside">
+                            <li>Solved practical hacking challenges in a virtual environment.</li>
+                            <li>Performed system monitoring and vulnerability analysis.</li>
+                            <li>Hacked things (ethically) and learned a ton.</li>
+                        </ul>
+                        <a href="https://www.linkedin.com/posts/m-harish-318068286_shadowfox-shadofoxinternship-internshipexperience-activity-7219936750582816769-SrKH" target="_blank" class="inline-block mt-4 text-cyber-green hover:underline text-sm">
+                            [ View Verification ]
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACHIEVEMENTS PAGE -->
+        <div id="achievements" class="page-section">
+            <h2 class="text-3xl font-pixel text-cyber-green mb-8 flex items-center gap-3">
+                <i data-lucide="flag" class="w-8 h-8"></i> > CTF_LOGS
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- CTF 1 -->
+                <a href="https://www.linkedin.com/posts/m-harish-318068286_ctf-hackquest2k25-cybersecurity-activity-7297214536015613952-o621" target="_blank" class="bg-cyber-card/80 backdrop-blur p-6 rounded border border-cyber-green/20 hover:border-cyber-green hover:bg-cyber-green/5 transition-all group">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyber-green">HackQuest 2k25</h3>
+                        <i data-lucide="trophy" class="w-5 h-5 text-yellow-500"></i>
+                    </div>
+                    <p class="text-gray-400 text-sm">Intense CTF at Jamal Mohammed College. Pushed my limits on complex challenges.</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- WRITEUPS PAGE -->
+        <div id="writeups" class="page-section">
+            <h2 class="text-3xl font-pixel text-cyber-green mb-8 flex items-center gap-3 animate-pulse">
+                <i data-lucide="book-open" class="w-8 h-8"></i> > BLOG & WRITEUPS
+            </h2>
+            <div class="max-w-3xl mx-auto">
+                <!-- Writeup Card -->
+                <div class="bg-cyber-card/90 backdrop-blur p-8 rounded border-2 border-cyber-green relative group transform hover:scale-[1.02] transition-transform">
+                    <div class="absolute -top-3 -right-3 bg-cyber-green text-black font-bold px-3 py-1 rounded shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform">
+                        MUST READ
+                    </div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="bg-cyber-green/20 p-3 rounded-full">
+                            <i data-lucide="file-text" class="w-8 h-8 text-cyber-green"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Simple CTF Room Walkthrough</h3>
+                            <p class="text-gray-400 font-mono text-sm">Platform: TryHackMe</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        I published a detailed walkthrough for the 'Simple CTF' room on TryHackMe. This guide covers scanning, enumeration, vulnerability exploitation, and privilege escalation, designed specifically for beginners entering the field.
+                    </p>
+
+                    <a href="https://medium.com/@m.harish17122005/tryhackme-simple-ctf-ba8369d6006d" target="_blank" class="inline-flex items-center gap-2 bg-cyber-green hover:bg-green-600 text-black font-bold py-3 px-6 rounded transition-colors w-full justify-center sm:w-auto">
+                        <i data-lucide="external-link" class="w-4 h-4"></i> Read Full Writeup
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CERTIFICATIONS PAGE -->
+        <div id="certs" class="page-section">
+            <h2 class="text-3xl font-pixel text-cyber-green mb-8 flex items-center gap-3">
+                <i data-lucide="award" class="w-8 h-8"></i> > SUDO APT GET CERT
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.linkedin.com/posts/m-harish-318068286_ethicalhacking-cybersecurity-tcmsecurity-activity-7351596429351538688-Bxic" target="_blank" class="cert-card bg-cyber-card/80 backdrop-blur p-4 rounded border border-gray-700 hover:border-cyber-green flex justify-between items-center group">
+                    <span class="text-gray-300 group-hover:text-white">Practical Ethical Hacking</span>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-cyber-green"></i>
+                </a>
+                <a href="https://www.linkedin.com/posts/m-harish-318068286_webhacking-tcm-cybersecurity-activity-7346783166776426497-8JhE" target="_blank" class="cert-card bg-cyber-card/80 backdrop-blur p-4 rounded border border-gray-700 hover:border-cyber-green flex justify-between items-center group">
+                    <span class="text-gray-300 group-hover:text-white">Practical Web Hacking</span>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-cyber-green"></i>
+                </a>
+                <a href="https://www.linkedin.com/posts/m-harish-318068286_cybersecurity-tcmsecurity-happylearinng-activity-7347890390194077697--Nea" target="_blank" class="cert-card bg-cyber-card/80 backdrop-blur p-4 rounded border border-gray-700 hover:border-cyber-green flex justify-between items-center group">
+                    <span class="text-gray-300 group-hover:text-white">Practical API Hacking</span>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-cyber-green"></i>
+                </a>
+                <a href="https://www.linkedin.com/posts/m-harish-318068286_bugbounty-cybersecurity-ethicalhacking-activity-7346203295499153408-dUKi" target="_blank" class="cert-card bg-cyber-card/80 backdrop-blur p-4 rounded border border-gray-700 hover:border-cyber-green flex justify-between items-center group">
+                    <span class="text-gray-300 group-hover:text-white">Practical Bug Bounty</span>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-cyber-green"></i>
+                </a>
+                <a href="https://www.linkedin.com/posts/m-harish-318068286_im-happy-to-share-that-ive-completed-the-activity-7347109608022253568-fhdg" target="_blank" class="cert-card bg-cyber-card/80 backdrop-blur p-4 rounded border border-gray-700 hover:border-cyber-green flex justify-between items-center group">
+                    <span class="text-gray-300 group-hover:text-white">Python 101 For Hackers</span>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-cyber-green"></i>
+                </a>
+                <a href="https://www.linkedin.com/posts/m-harish-318068286_cybersecurity-isc2-professionaldevelopment-activity-7246134310653583360-A20P" target="_blank" class="cert-card bg-cyber-card/80 backdrop-blur p-4 rounded border border-gray-700 hover:border-cyber-green flex justify-between items-center group">
+                    <span class="text-gray-300 group-hover:text-white">ISC2 Certs</span>
+                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 group-hover:text-cyber-green"></i>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-gray-600 text-xs font-mono border-t border-gray-900 bg-cyber-dark/80 backdrop-blur">
+        <p>Built with <i data-lucide="coffee" class="w-3 h-3 inline text-cyber-green"></i> and <i data-lucide="cat" class="w-3 h-3 inline text-cyber-green"></i> by M Harish</p>
+    </footer>
+
+    <!-- Logic -->
+    <script>
+        lucide.createIcons();
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('active');
+                if(el.getAttribute('onclick').includes(pageId)) {
+                    el.classList.add('active');
+                }
+            });
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function meow() {
+            const bubble = document.querySelector('.cyber-cat .absolute');
+            bubble.style.opacity = '1';
+            bubble.innerText = "Meow! Access Granted.";
+            setTimeout(() => {
+                bubble.style.opacity = '0';
+            }, 2000);
+        }
+
+        document.querySelectorAll('.skill-tag').forEach(el => {
+            el.className = "px-3 py-1 border border-cyber-green/50 rounded text-cyber-green text-sm hover:bg-cyber-green hover:text-black cursor-default transition-colors";
+        });
+
+        // --- Matrix Rain Effect ---
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas to full screen
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Katakana characters + numbers
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        // Initialize drops
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            // Black background with slight opacity to create trail effect
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff41'; // Green text
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset drop to top randomly
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        // Run animation
+        setInterval(drawMatrix, 33);
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // --- Letter-by-Letter Matrix Name Animation ---
+        const nameElement = document.getElementById('heroName');
+        const names = ["HARISH", "MADIZEN"];
+        let nameIndex = 0;
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*";
+
+        function animateName() {
+            const currentName = names[nameIndex];
+            const nextName = names[(nameIndex + 1) % names.length];
+            nameIndex = (nameIndex + 1) % names.length;
+            
+            let iteration = 0;
+            const interval = setInterval(() => {
+                nameElement.innerText = nextName
+                    .split("")
+                    .map((letter, index) => {
+                        if (index < iteration) {
+                            return nextName[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+                
+                // Update glitch data-text
+                nameElement.setAttribute('data-text', nameElement.innerText);
+
+                if (iteration >= nextName.length) {
+                    clearInterval(interval);
+                    nameElement.innerText = nextName;
+                    nameElement.setAttribute('data-text', nextName);
+                }
+                
+                iteration += 1 / 3; 
+            }, 30);
+        }
+
+        // Run name animation every 4 seconds
+        setInterval(animateName, 4000);
+
+    </script>
+</body>
+</html>
