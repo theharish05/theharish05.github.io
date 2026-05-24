@@ -41,52 +41,55 @@
             box-shadow: 0 12px 24px rgba(255,255,255,0.08); 
         }
 
-        /* Realistic Orange & White Running Cat Mechanics */
-        @keyframes realisticRun {
-            0% { left: -120px; }
-            100% { left: 100%; }
+        /* Static Peeking Cat Tail & Ear Subtle Breathing Motions */
+        @keyframes subtleTail {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(8deg); }
         }
-        @keyframes spineExtend {
-            0%, 100% { transform: scaleX(1) translateY(0); }
-            50% { transform: scaleX(1.08) translateY(-4px); }
-        }
-        @keyframes frontLegGait {
-            0%, 100% { transform: rotate(-25deg); }
-            50% { transform: rotate(30deg); }
-        }
-        @keyframes backLegGait {
-            0%, 100% { transform: rotate(35deg); }
-            50% { transform: rotate(-20deg); }
-        }
-        @keyframes tailWiggle {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(10deg); }
-        }
-
-        .cat-runner-container {
-            position: fixed; bottom: 25px; width: 110px; height: 50px;
-            animation: realisticRun 12s infinite linear; z-index: 50;
-        }
-        .cat-spine { animation: spineExtend 0.25s infinite linear; transform-origin: center; }
-        .front-leg { animation: frontLegGait 0.25s infinite linear; transform-origin: top center; }
-        .back-leg { animation: backLegGait 0.25s infinite linear; transform-origin: top center; }
-        .cat-tail { animation: tailWiggle 0.5s infinite ease-in-out; transform-origin: bottom left; }
+        .peeking-tail { animation: subtleTail 4s infinite ease-in-out; transform-origin: bottom left; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative text-lg">
 
     <div class="digital-bg"></div>
 
-    <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900">
-        <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
-        <div class="flex gap-8 text-sm uppercase tracking-widest">
-            <button onclick="switchTab('home')" id="nav-home" class="nav-btn active-tab transition-all">Home</button>
-            <button onclick="switchTab('about')" id="nav-about" class="nav-btn hover:text-white text-neutral-500 transition-all">About & Skills</button>
-            <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn hover:text-white text-neutral-500 transition-all">Projects</button>
+    <header class="w-full max-w-4xl mx-auto px-6 pt-16 pb-10 relative">
+        
+        <div id="yamin-peeker" class="absolute -top-1 right-12 z-10 flex flex-col items-center cursor-pointer select-none group">
+            <div id="yamin-bubble" class="opacity-0 scale-75 transition-all duration-300 ease-out bg-white text-black text-xs font-bold px-3 py-1.5 rounded-md mb-1 whitespace-nowrap shadow-xl pointer-events-none absolute -top-10">
+                Hi! I'm Yamin 🐾
+            </div>
+            
+            <div class="w-20 h-14 relative overflow-visible">
+                <svg class="w-6 h-10 absolute -left-4 bottom-2 peeking-tail text-[#f97316]" viewBox="0 0 20 40" fill="currentColor">
+                    <path d="M 10 40 Q 25 25 15 10 Q 8 0 12 0 Q 18 0 18 15 Q 22 30 10 40 Z"/>
+                </svg>
+                <svg class="w-full h-full" viewBox="0 0 80 56" fill="currentColor">
+                    <ellipse cx="40" cy="36" rx="16" ry="14" fill="#f97316"/>
+                    <path d="M 32 42 Q 40 34 48 42 Q 40 48 32 42 Z" fill="#ffffff"/>
+                    <path d="M 26 26 L 16 10 L 32 22 Z" fill="#f97316"/>
+                    <path d="M 54 26 L 64 10 L 48 22 Z" fill="#ffffff"/>
+                    <path d="M 52 25 L 60 14 L 49 22 Z" fill="#f97316"/>
+                    <ellipse cx="33" cy="32" rx="2.5" ry="3.5" fill="#000000"/>
+                    <ellipse cx="47" cy="32" rx="2.5" ry="3.5" fill="#000000"/>
+                    <polygon points="38,37 42,37 40,39" fill="#f43f5e"/>
+                    <rect x="20" y="46" width="10" height="10" rx="4" fill="#ffffff"/>
+                    <rect x="50" y="46" width="10" height="10" rx="4" fill="#f97316"/>
+                </svg>
+            </div>
         </div>
-    </nav>
 
-    <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900 pb-4 relative z-20 bg-black">
+            <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
+            <div class="flex gap-8 text-sm uppercase tracking-widest">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn active-tab transition-all">Home</button>
+                <button onclick="switchTab('about')" id="nav-about" class="nav-btn hover:text-white text-neutral-500 transition-all">About & Skills</button>
+                <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn hover:text-white text-neutral-500 transition-all">Projects</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-4">
         
         <section id="home" class="tab-content active space-y-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white tracking-widest uppercase mb-4">
@@ -114,20 +117,21 @@
             
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Experience</h2>
-                <div class="space-y-6">
-                    <div class="p-2">
-                        <div class="flex justify-between items-center text-white font-bold text-xl">
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="interactive-card bg-neutral-950/30 p-6 rounded-md">
+                        <div class="flex justify-between items-center text-white font-bold text-xl flex-wrap gap-2">
                             <span>ISRO Internship</span> 
                             <span class="text-sm font-normal text-neutral-500 font-mono">12/2025 — 01/2026</span>
                         </div>
-                        <div class="text-neutral-400 mt-2 text-base">Enforced strict access control policies and managed structured network infrastructure segmentation layouts for internal operations.</div>
+                        <div class="text-neutral-400 mt-3 text-base leading-relaxed">Enforced strict access control policies and managed structured network infrastructure segmentation layouts for internal operations.</div>
                     </div>
-                    <div class="p-2">
-                        <div class="flex justify-between items-center text-white font-bold text-xl">
+                    
+                    <div class="interactive-card bg-neutral-950/30 p-6 rounded-md">
+                        <div class="flex justify-between items-center text-white font-bold text-xl flex-wrap gap-2">
                             <span>Shadow Fox Internship</span> 
                             <span class="text-sm font-normal text-neutral-500 font-mono">05/2024 — 06/2024</span>
                         </div>
-                        <div class="text-neutral-400 mt-2 text-base">Executed continuous security tracking protocols and verified flaw remediation maps across assigned network infrastructure.</div>
+                        <div class="text-neutral-400 mt-3 text-base leading-relaxed">Executed continuous security tracking protocols and verified flaw remediation maps across assigned network infrastructure.</div>
                     </div>
                 </div>
             </div>
@@ -135,24 +139,25 @@
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Achievements & CTFs</h2>
                 <div class="grid grid-cols-1 gap-4 text-base font-mono">
-                    <a href="https://drive.google.com/file/d/1X1kC-cctN3smT0m19Y9zYqTgF17cuViR/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/40 rounded hover:border-neutral-400 transition-all flex justify-between items-center group">
+                    <a href="https://drive.google.com/file/d/1X1kC-cctN3smT0m19Y9zYqTgF17cuViR/view?usp=sharing" target="_blank" class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center group">
                         <span><strong class="text-white">RUNNER UP</strong> — L3M0n CTF (Amrita Vishwa Vidyapeetham)</span>
-                        <span class="text-neutral-600 group-hover:text-white transition-colors">↗</span>
+                        <span class="text-neutral-500 group-hover:text-white transition-colors">↗</span>
                     </a>
-                    <div class="p-4 border border-neutral-900 bg-neutral-950/40 rounded flex justify-between items-center">
+                    <div class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center">
                         <span><strong class="text-white">RANK 9</strong> — YUGAM CTF (Kumaraguru College of Engineering)</span>
+                        <span class="text-neutral-700 text-sm">Active</span>
                     </div>
-                    <a href="https://www.linkedin.com/posts/m-harish-318068286_ctf-hackquest2k25-cybersecurity-activity-7297214536015613952-o621" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/40 rounded hover:border-neutral-400 transition-all flex justify-between items-center group">
+                    <a href="https://www.linkedin.com/posts/m-harish-318068286_ctf-hackquest2k25-cybersecurity-activity-7297214536015613952-o621" target="_blank" class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center group">
                         <span><strong class="text-white">TOP 30</strong> — Hack Quest 2k24 (HackQuest & JMC, Trichy)</span>
-                        <span class="text-neutral-600 group-hover:text-white transition-colors">↗</span>
+                        <span class="text-neutral-500 group-hover:text-white transition-colors">↗</span>
                     </a>
                 </div>
             </div>
 
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Technical Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-base">
-                    <div class="space-y-3 border border-neutral-900 bg-neutral-950/20 p-6 rounded-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base">
+                    <div class="interactive-card bg-neutral-950/20 p-6 rounded-md space-y-3">
                         <h3 class="text-white font-bold uppercase tracking-wider text-sm border-b border-neutral-900 pb-2 mb-2">// Cybersecurity</h3>
                         <p><strong class="text-neutral-400">SOC & Monitoring:</strong> SIEM, Splunk - Basics, Wireshark, IDS, Alert Analysis.</p>
                         <p><strong class="text-neutral-400">Red Teaming:</strong> Ethical Hacking.</p>
@@ -161,7 +166,7 @@
                         <p><strong class="text-neutral-400">Technologies/Framework:</strong> Linux, Git, MongoDB, VS Code.</p>
                     </div>
                     
-                    <div class="space-y-3 border border-neutral-900 bg-neutral-950/20 p-6 rounded-sm">
+                    <div class="interactive-card bg-neutral-950/20 p-6 rounded-md space-y-3">
                         <h3 class="text-white font-bold uppercase tracking-wider text-sm border-b border-neutral-900 pb-2 mb-2">// DevOps & Cloud</h3>
                         <p><strong class="text-neutral-400">DevOps & CI/CD:</strong> Docker, Kubernetes, Jenkins, GitHub, Ansible.</p>
                         <p><strong class="text-neutral-400">Cloud:</strong> AWS (EC2, S3, IAM, EKS, ECR, ECS, VPC), Terraform.</p>
@@ -176,6 +181,7 @@
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Certifications</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-mono">
                     <a href="https://www.linkedin.com/posts/m-harish-318068286_cybersecurity-isc2-professionaldevelopment-activity-7246134310653583360-A20P" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ ISC2 Certification ]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1dl0tN-Q-XeM0O9W-sdvbPbdK6lOxemC0/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center text-orange-400"><span>[ TryHackMe Advent of Cyber 2024 ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1cLLd2SsmRWmC5KV_67e1p8OOihYuBj2K/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ LetsDefend SOC Analyst ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1V7nyruiw74SRL4wNyCk6mHq-p2pX0tPK/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ LetsDefend Malware Analysis ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1TP7h2S2HVVJLUk2e8WivdYahyCR3h_RD/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical Ethical Hacking ]</span> <span>↗</span></a>
@@ -244,37 +250,13 @@
                     </div>
                     <h3 class="text-xl font-bold text-white">Distributed Multi-Language Execution Platform</h3>
                     <p class="text-sm text-neutral-400">5-node physical Raspberry Pi cluster system context deploying load-balanced code execution threads via HAProxy.</p>
-                    <p class="text-xs font-mono text-neutral-600">Raspberry Pi Cluster, HAProxy, Jobe sandbox environment engine</p>
+                    <p class="text-xs font-mono text-neutral-600">Raspberry Pi Cluster, HAProxy, Jobe sandbox environment engine, Nginx, Apache2</p>
                 </div>
             </div>
 
         </section>
 
     </main>
-
-    <div id="yamin-runner" class="cat-runner-container cursor-pointer">
-        <div class="relative w-full h-full flex flex-col items-center">
-            <div id="yamin-bubble" class="opacity-0 scale-75 transition-all duration-300 ease-out bg-white text-black text-xs font-bold px-3 py-1.5 rounded-md mb-1 absolute -top-9 whitespace-nowrap shadow-xl pointer-events-none">
-                Hi! I'm Yamin 🐾
-            </div>
-            
-            <svg class="w-16 h-12 text-orange-500 cat-spine" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
-                <path class="back-leg" d="M 25 35 Q 10 50 5 55 L 12 58 Q 20 52 30 42 Z" fill="#ffffff"/>
-                <path class="back-leg" d="M 32 32 Q 18 48 10 52 L 16 56 Q 26 50 36 38 Z" fill="#f97316"/>
-                <path d="M 30 30 Q 55 15 80 25 L 85 40 Q 55 45 25 38 Z" fill="#f97316"/>
-                <path d="M 42 35 Q 60 28 75 33 L 70 42 Q 52 44 35 39 Z" fill="#ffffff"/>
-                <circle cx="92" cy="20" r="11" fill="#f97316"/>
-                <path d="M 84 12 L 80 2 L 90 8 Z" fill="#f97316"/>
-                <path d="M 94 10 L 102 2 L 98 11 Z" fill="#ffffff"/>
-                <path d="M 88 24 Q 94 18 100 24 Z" fill="#ffffff"/>
-                <circle cx="91" cy="17" r="1.5" fill="#000000"/>
-                <circle cx="98" cy="19" r="1.5" fill="#000000"/>
-                <path class="front-leg" d="M 82 32 Q 92 48 98 54 L 104 52 Q 96 44 86 30 Z" fill="#ffffff"/>
-                <path class="front-leg" d="M 76 34 Q 84 50 88 56 L 94 54 Q 88 46 80 32 Z" fill="#f97316"/>
-                <path class="cat-tail" d="M 32 32 Q 18 20 8 26 Q 0 32 6 18" fill="none" stroke="#f97316" stroke-width="4.5" stroke-linecap="round"/>
-            </svg>
-        </div>
-    </div>
 
     <footer class="border-t border-neutral-950 bg-black py-8 text-center text-xs text-neutral-600 uppercase tracking-widest mt-12">
         &copy; 2026 Madara. Core metrics active.
@@ -318,26 +300,26 @@
             window.scrollTo(0,0);
         }
 
-        // Cat Interactivity Engine (Hover/Click Actions)
-        const runnerWidget = document.getElementById('yamin-runner');
-        const speechBubble = document.getElementById('yamin-bubble');
+        // Cat Click Voice Bubble Controller (Peeking interaction hooks)
+        const peekingWidget = document.getElementById('yamin-peeker');
+        const bubbleBox = document.getElementById('yamin-bubble');
         
         function showBubble() {
-            speechBubble.classList.remove('opacity-0', 'scale-75');
-            speechBubble.classList.add('opacity-100', 'scale-100');
+            bubbleBox.classList.remove('opacity-0', 'scale-75');
+            bubbleBox.classList.add('opacity-100', 'scale-100');
         }
         function hideBubble() {
-            speechBubble.classList.remove('opacity-100', 'scale-100');
-            speechBubble.classList.add('opacity-0', 'scale-75');
+            bubbleBox.classList.remove('opacity-100', 'scale-100');
+            bubbleBox.classList.add('opacity-0', 'scale-75');
         }
         
-        runnerWidget.addEventListener('click', (e) => {
+        peekingWidget.addEventListener('click', (e) => {
             e.stopPropagation();
             showBubble();
             setTimeout(hideBubble, 3000);
         });
-        runnerWidget.addEventListener('mouseenter', showBubble);
-        runnerWidget.addEventListener('mouseleave', hideBubble);
+        peekingWidget.addEventListener('mouseenter', showBubble);
+        peekingWidget.addEventListener('mouseleave', hideBubble);
 
         // Name Header Switching Typer (Harish <-> Madara)
         const identities = ["M HARISH", "MADARA"];
