@@ -7,182 +7,209 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html { scroll-behavior: smooth; background-color: #000; }
-        body { background-color: #000; font-family: 'Courier New', Courier, monospace; color: #a3a3a3; line-height: 1.6; }
+        body { background-color: #000; font-family: 'Courier New', Courier, monospace; color: #b5b5b5; line-height: 1.7; }
         
-        /* True Minimalist Theme Styles */
-        .link-hover { text-decoration: none; color: #a3a3a3; transition: color 0.2s ease-in-out; }
-        .link-hover:hover { color: #ffffff; text-decoration: underline; text-underline-offset: 4px; }
-        .active-tab { color: #ffffff; font-weight: bold; border-bottom: 1px solid #fff; padding-bottom: 2px; }
+        /* Modern Minimalist Black Theme Styles */
+        .link-hover { text-decoration: none; color: #a3a3a3; transition: all 0.2s ease-in-out; }
+        .link-hover:hover { color: #ffffff; }
+        .active-tab { color: #ffffff; font-weight: bold; border-bottom: 2px solid #fff; padding-bottom: 4px; }
         
         /* Digital Background Grid */
         .digital-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveGrid 20s linear infinite;
-        }
-        @keyframes moveGrid {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50px); }
+                linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
         /* Animations */
-        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         
         .cursor-blink { animation: blink 1s infinite; color: #fff; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* Yamin The Cat Animations */
-        .yamin-body { animation: breathe 2s infinite ease-in-out; transform-origin: bottom; }
-        .yamin-tail { animation: swish 3s infinite ease-in-out; transform-origin: bottom left; }
-        @keyframes breathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.95); } }
-        @keyframes swish { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(15deg); } }
+        /* Project Hover 3D Pop Out Effect */
+        .project-card { transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease; }
+        .project-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 10px 20px rgba(255,255,255,0.05); }
+
+        /* Yamin The Running Cat Animation Across Screen */
+        @keyframes catRunAcross {
+            0% { left: -100px; }
+            100% { left: 100%; }
+        }
+        @keyframes catGait {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .cat-screen-runner {
+            position: fixed; bottom: 20px; width: 90px; height: 60px;
+            animation: catRunAcross 14s infinite linear; z-index: 40;
+        }
+        .cat-gait-loop { animation: catGait 0.25s infinite linear; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col relative">
+<body class="min-h-screen flex flex-col relative text-lg">
 
     <div class="digital-bg"></div>
 
-    <nav class="w-full max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div class="text-white font-bold tracking-widest text-sm">~/madara</div>
-        <div class="flex gap-6 text-xs uppercase tracking-widest">
-            <button onclick="switchTab('home')" id="nav-home" class="nav-btn active-tab transition-colors">Home</button>
-            <button onclick="switchTab('about')" id="nav-about" class="nav-btn hover:text-white transition-colors">About</button>
-            <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn hover:text-white transition-colors">Projects</button>
+    <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900">
+        <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
+        <div class="flex gap-8 text-sm uppercase tracking-widest">
+            <button onclick="switchTab('home')" id="nav-home" class="nav-btn active-tab transition-all">Home</button>
+            <button onclick="switchTab('about')" id="nav-about" class="nav-btn hover:text-white text-neutral-500 transition-all">About & Skills</button>
+            <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn hover:text-white text-neutral-500 transition-all">Projects</button>
         </div>
     </nav>
 
-    <main class="flex-grow w-full max-w-3xl mx-auto px-6 py-8">
+    <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12">
         
-        <section id="home" class="tab-content active space-y-6">
-            <h1 class="text-3xl font-bold text-white tracking-widest uppercase mb-6">
+        <section id="home" class="tab-content active space-y-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-widest uppercase mb-4">
                 <span id="name-typing"></span><span class="cursor-blink">_</span>
             </h1>
             
-            <p class="text-white text-sm font-semibold tracking-wide">
+            <p class="text-white text-xl font-semibold tracking-wide border-l-2 border-neutral-700 pl-4">
                 > <span id="role-typing"></span><span class="cursor-blink">|</span>
             </p>
             
-            <p class="text-sm">
-                Cybersecurity student blending threat engineering with modern DevOps. Focused on zero-trust cloud configurations, defensive architecture, and scalable automation.
+            <p class="text-neutral-300 text-lg max-w-3xl leading-relaxed">
+                Cybersecurity undergraduate specializing in defensive and offensive security operations mixed with DevOps and cloud systems[cite: 6, 51]. Armed with hands-on foundations in network defense, vulnerability assessments, and CI/CD logging workflows, my background brings an essential layer of security awareness to everything I build—from testing architecture to provisioning automated cloud environments[cite: 6, 52, 53].
             </p>
             
-            <div class="flex items-center gap-6 pt-6 text-sm uppercase tracking-widest">
-                <a href="https://github.com/theharish05" target="_blank" class="link-hover flex items-center gap-2">
-                    [ GitHub ]
-                </a>
-                <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover flex items-center gap-2">
-                    [ LinkedIn ]
-                </a>
-                <a href="mailto:mharishworkcyber@gmail.com" class="link-hover flex items-center gap-2 text-white">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    Email
-                </a>
+            <div class="flex flex-wrap items-center gap-8 pt-8 text-base uppercase tracking-widest font-bold">
+                <a href="https://github.com/theharish05" target="_blank" class="link-hover text-white">[ GitHub ]</a>
+                <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover text-white">[ LinkedIn ]</a>
+                <button onclick="copyEmailToClipboard()" class="link-hover text-white focus:outline-none">
+                    [ <span id="email-text">Copy Email</span> ]
+                </button>
             </div>
         </section>
 
-        <section id="about" class="tab-content space-y-12">
+        <section id="about" class="tab-content space-y-14">
             
-            <div>
-                <h2 class="text-lg font-bold text-white border-b border-gray-800 pb-2 mb-4 uppercase tracking-widest">Experience</h2>
-                <ul class="space-y-4 text-sm">
-                    <li>
-                        <div class="flex justify-between text-white"><span>ISRO Internship</span> <span class="text-xs text-gray-500">12/2025 — 01/2026</span></div>
-                        <div class="text-gray-400 mt-1">Enforced strict access control policies and segmented network infrastructure for research components.</div>
-                    </li>
-                    <li>
-                        <div class="flex justify-between text-white"><span>Shadow Fox Internship</span> <span class="text-xs text-gray-500">05/2024 — 06/2024</span></div>
-                        <div class="text-gray-400 mt-1">Conducted vulnerability monitoring and mitigated active security flaws across training targets.</div>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                <h2 class="text-lg font-bold text-white border-b border-gray-800 pb-2 mb-4 uppercase tracking-widest">Achievements & CTFs</h2>
-                <ul class="list-disc list-inside space-y-1 text-sm text-gray-400">
-                    <li><strong class="text-white">Runner Up</strong> — L3M0n CTF <a href="https://drive.google.com/file/d/1X1kC-cctN3smT0m19Y9zYqTgF17cuViR/view?usp=sharing" target="_blank" class="link-hover text-xs ml-2">[Verify]</a></li>
-                    <li><strong class="text-white">Rank 9</strong> — YUGAM CTF</li>
-                    <li><strong class="text-white">Top 30</strong> — Hack Quest 2k24 <a href="https://www.linkedin.com/posts/m-harish-318068286_ctf-hackquest2k25-cybersecurity-activity-7297214536015613952-o621" target="_blank" class="link-hover text-xs ml-2">[Verify]</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h2 class="text-lg font-bold text-white border-b border-gray-800 pb-2 mb-4 uppercase tracking-widest">Core Stack</h2>
-                <div class="text-sm space-y-2">
-                    <p><strong class="text-white">Security:</strong> SIEM, Splunk, Wireshark, IDS, Ethical Hacking, API/Web Testing, Burp Suite, Nmap.</p>
-                    <p><strong class="text-white">DevOps & Cloud:</strong> Docker, Kubernetes, Jenkins, Terraform, AWS (EC2, S3, IAM, VPC), Linux.</p>
-                    <p><strong class="text-white">Languages:</strong> Python, Bash, SQL, Java, C.</p>
+            <div class="space-y-6">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Experience</h2>
+                <div class="space-y-6">
+                    <div class="p-2">
+                        <div class="flex justify-between items-center text-white font-bold text-xl">
+                            <span>ISRO Internship</span> 
+                            <span class="text-sm font-normal text-neutral-500 font-mono">12/2025 — 01/2026</span>
+                        </div>
+                        <div class="text-neutral-400 mt-2 text-base">Enforced strict access control policies and managed structured network infrastructure segmentation layouts for internal operations[cite: 33, 81].</div>
+                    </div>
+                    <div class="p-2">
+                        <div class="flex justify-between items-center text-white font-bold text-xl">
+                            <span>Shadow Fox Internship</span> 
+                            <span class="text-sm font-normal text-neutral-500 font-mono">05/2024 — 06/2024</span>
+                        </div>
+                        <div class="text-neutral-400 mt-2 text-base">Executed continuous security tracking protocols and verified flaw remediation maps across assigned network infrastructure[cite: 35].</div>
+                    </div>
                 </div>
             </div>
 
-            <div>
-                <h2 class="text-lg font-bold text-white border-b border-gray-800 pb-2 mb-4 uppercase tracking-widest">Certifications</h2>
-                <div class="flex flex-wrap gap-4 text-xs">
-                    <a href="https://www.linkedin.com/posts/m-harish-318068286_cybersecurity-isc2-professionaldevelopment-activity-7246134310653583360-A20P" target="_blank" class="link-hover">[ ISC2 Certification ]</a>
-                    <a href="https://drive.google.com/file/d/1cLLd2SsmRWmC5KV_67e1p8OOihYuBj2K/view?usp=sharing" target="_blank" class="link-hover">[ SOC Analyst ]</a>
-                    <a href="https://drive.google.com/file/d/1V7nyruiw74SRL4wNyCk6mHq-p2pX0tPK/view?usp=sharing" target="_blank" class="link-hover">[ Malware Analysis ]</a>
-                    <a href="https://drive.google.com/file/d/1TP7h2S2HVVJLUk2e8WivdYahyCR3h_RD/view?usp=sharing" target="_blank" class="link-hover">[ Ethical Hacking ]</a>
-                    <a href="https://drive.google.com/file/d/1GoVOKO_U61S7BuMJRJrnBpR0GCQ1uiiV/view?usp=sharing" target="_blank" class="link-hover">[ Web Hacking ]</a>
-                    <a href="https://drive.google.com/file/d/1yU2A26wr1fPcIg-ZE44sT0-z1SesW0zz/view?usp=sharing" target="_blank" class="link-hover">[ API Hacking ]</a>
-                    <a href="https://drive.google.com/file/d/1ULZd4ld78YxOmB0gX2xS4a20m0dg5iHD/view?usp=sharing" target="_blank" class="link-hover">[ Bug Bounty ]</a>
-                    <a href="https://drive.google.com/file/d/1VbY8RAtR__87cjWFmYWrU0jxwEzL7SNk/view?usp=sharing" target="_blank" class="link-hover">[ Python for Hackers ]</a>
+            <div class="space-y-6">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Achievements & CTFs</h2>
+                <div class="grid grid-cols-1 gap-4 text-base font-mono">
+                    <a href="https://drive.google.com/file/d/1X1kC-cctN3smT0m19Y9zYqTgF17cuViR/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/40 rounded hover:border-neutral-400 transition-all flex justify-between items-center group">
+                        <span><strong class="text-white">RUNNER UP</strong> — L3M0n CTF (Amrita Vishwa Vidyapeetham) [cite: 37, 38]</span>
+                        <span class="text-neutral-600 group-hover:text-white transition-colors">↗</span>
+                    </a>
+                    <div class="p-4 border border-neutral-900 bg-neutral-950/40 rounded flex justify-between items-center">
+                        <span><strong class="text-white">RANK 9</strong> — YUGAM CTF (Kumaraguru College of Engineering)</span>
+                        <span class="text-neutral-700 text-xs uppercase">No Certificate</span>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/m-harish-318068286_ctf-hackquest2k25-cybersecurity-activity-7297214536015613952-o621" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/40 rounded hover:border-neutral-400 transition-all flex justify-between items-center group">
+                        <span><strong class="text-white">TOP 30</strong> — Hack Quest 2k24 (HackQuest & JMC, Trichy) [cite: 41, 42]</span>
+                        <span class="text-neutral-600 group-hover:text-white transition-colors">↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Technical Capabilities</h2>
+                <div class="space-y-4 text-base bg-neutral-950/20 p-4 border border-neutral-900 rounded-sm">
+                    <p><strong class="text-white uppercase tracking-wide text-sm block mb-1">Defensive & Offensive Security:</strong> SIEM, Splunk, Wireshark, IDS Alert Configurations, Ethical Hacking, App Infrastructure Pen-Testing, Bug Bounty workflows, Burp Suite, Nmap, Nessus[cite: 11, 12, 13].</p>
+                    <p><strong class="text-white uppercase tracking-wide text-sm block mb-1">DevOps Frameworks & Infrastructure Cloud:</strong> Docker, Kubernetes Engine, Jenkins Automation Pipelines, Ansible, Terraform IaC, Amazon Web Services (EC2, S3, IAM, VPC networks), Linux Environment management[cite: 64, 65, 68].</p>
+                    <p><strong class="text-white uppercase tracking-wide text-sm block mb-1">Languages:</strong> Python scripts, Bash workflows, Core SQL queries, Java, C development[cite: 14, 67].</p>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Certifications</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-mono">
+                    <a href="https://www.linkedin.com/posts/m-harish-318068286_cybersecurity-isc2-professionaldevelopment-activity-7246134310653583360-A20P" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/30 rounded hover:border-neutral-500 transition-colors flex justify-between items-center"><span>[ ISC2 Certification ] [cite: 30]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1cLLd2SsmRWmC5KV_67e1p8OOihYuBj2K/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/30 rounded hover:border-neutral-500 transition-colors flex justify-between items-center"><span>[ LetsDefend SOC Analyst ] [cite: 26]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1V7nyruiw74SRL4wNyCk6mHq-p2pX0tPK/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/30 rounded hover:border-neutral-500 transition-colors flex justify-between items-center"><span>[ LetsDefend Malware Analysis ] [cite: 27]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1TP7h2S2HVVJLUk2e8WivdYahyCR3h_RD/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/30 rounded hover:border-neutral-500 transition-colors flex justify-between items-center"><span>[ TCM Practical Ethical Hacking ] [cite: 28]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1GoVOKO_U61S7BuMJRJrnBpR0GCQ1uiiV/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/30 rounded hover:border-neutral-500 transition-colors flex justify-between items-center"><span>[ TCM Practical Web Hacking ] [cite: 29]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1yU2A26wr1fPcIg-ZE44sT0-z1SesW0zz/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/30 rounded hover:border-neutral-500 transition-colors flex justify-between items-center"><span>[ TCM Practical API Hacking ] [cite: 29]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1ULZd4ld78YxOmB0gX2xS4a20m0dg5iHD/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/30 rounded hover:border-neutral-500 transition-colors flex justify-between items-center"><span>[ TCM Practical Bug Bounty ] [cite: 29]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1VbY8RAtR__87cjWFmYWrU0jxwEzL7SNk/view?usp=sharing" target="_blank" class="p-4 border border-neutral-900 bg-neutral-950/30 rounded hover:border-neutral-500 transition-colors flex justify-between items-center"><span>[ TCM Python 101 for Hackers ]</span> <span>↗</span></a>
                 </div>
             </div>
 
         </section>
 
-        <section id="projects" class="tab-content space-y-8">
+        <section id="projects" class="tab-content space-y-10">
             
-            <h2 class="text-lg font-bold text-white border-b border-gray-800 pb-2 mb-4 uppercase tracking-widest">Engineering & Architecture</h2>
+            <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Engineering & Architecture</h2>
             
-            <div class="space-y-8">
-                <div>
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1">
-                        <strong class="text-white text-base">Intrusion Detection System</strong>
-                        <a href="https://github.com/Kira-007/Intrusion-Detection-System" target="_blank" class="link-hover text-xs uppercase">[ Codebase ]</a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="project-card border border-neutral-900 bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Network_Defense</div>
+                        <h3 class="text-xl font-bold text-white hover:underline">
+                            <a href="https://github.com/Kira-007/Intrusion-Detection-System" target="_blank">Intrusion Detection System ↗</a>
+                        </h3>
+                        <p class="text-sm text-neutral-400">Real-time deep network packet layer capture scripts built to process alerts[cite: 19].</p>
                     </div>
-                    <p class="text-sm text-gray-400 mb-1">Real-time network layer capture scripts deploying automated alerts and system logs.</p>
-                    <p class="text-xs text-gray-500">Stack: Python, Flask, Scapy, PySide6</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Scapy, PySide6 [cite: 20]</p>
                 </div>
 
-                <div>
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1">
-                        <strong class="text-white text-base">Agentless Vuln Scanner</strong>
-                        <a href="https://github.com/theharish05/Agentless-Vulnerability-Scanner-For-Windows" target="_blank" class="link-hover text-xs uppercase">[ Codebase ]</a>
+                <div class="project-card border border-neutral-900 bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Assessment_Eng</div>
+                        <h3 class="text-xl font-bold text-white hover:underline">
+                            <a href="https://github.com/theharish05/Agentless-Vulnerability-Scanner-For-Windows" target="_blank">Agentless Windows Scanner ↗</a>
+                        </h3>
+                        <p class="text-sm text-neutral-400">Local auditing engine tracing dynamic system flaws against real-time API vulnerability indices[cite: 21, 23].</p>
                     </div>
-                    <p class="text-sm text-gray-400 mb-1">Local security engine mapping system audits against live NVD REST API vulnerability data.</p>
-                    <p class="text-xs text-gray-500">Stack: Python, PySide6, Nmap, Requests</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, PySide6, Nmap, Requests [cite: 24]</p>
                 </div>
 
-                <div>
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1">
-                        <strong class="text-white text-base">CI/CD Failure Analyzer</strong>
-                        <a href="https://github.com/Manikandan23005/CI-CD-pipeline-Failure-Analyzer" target="_blank" class="link-hover text-xs uppercase">[ Codebase ]</a>
+                <div class="project-card border border-neutral-900 bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Pipeline_Security</div>
+                        <h3 class="text-xl font-bold text-white hover:underline">
+                            <a href="https://github.com/Manikandan23005/CI-CD-pipeline-Failure-Analyzer" target="_blank">CI/CD Failure Analyzer ↗</a>
+                        </h3>
+                        <p class="text-sm text-neutral-400">Integrated Jenkins system logging architectures parsing build traces into clean visual error tables[cite: 70].</p>
                     </div>
-                    <p class="text-sm text-gray-400 mb-1">Jenkins API integration parsing failed build logs into actionable containerized error metrics.</p>
-                    <p class="text-xs text-gray-500">Stack: Python, Flask, Jenkins, Docker</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Jenkins, Docker [cite: 70]</p>
                 </div>
 
-                <div>
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1">
-                        <strong class="text-white text-base">AWS Infra Automation</strong>
-                        <a href="https://github.com/theharish05/Terraform-AWS-Infrastructure-Automation" target="_blank" class="link-hover text-xs uppercase">[ Codebase ]</a>
+                <div class="project-card border border-neutral-900 bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Clouds_IaC</div>
+                        <h3 class="text-xl font-bold text-white hover:underline">
+                            <a href="https://github.com/theharish05/Terraform-AWS-Infrastructure-Automation" target="_blank">AWS Infra Automation ↗</a>
+                        </h3>
+                        <p class="text-sm text-neutral-400">Declarative components deploying sandboxed multi-zone networks and cloud configurations[cite: 70].</p>
                     </div>
-                    <p class="text-sm text-gray-400 mb-1">Terraform modules automating VPCs, security groups, and cloud scaling configurations.</p>
-                    <p class="text-xs text-gray-500">Stack: Terraform, AWS (EC2, S3, VPC, IAM)</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Terraform, AWS (EC2, S3, VPC) [cite: 70]</p>
                 </div>
 
-                <div>
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-1">
-                        <strong class="text-white text-base">Distributed Execution Platform</strong>
-                        <span class="text-xs text-gray-600 uppercase">[ Bare-Metal ]</span>
+                <div class="project-card border border-neutral-900 bg-neutral-950/30 p-6 rounded-md md:col-span-2 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Bare_Metal_Hardware</span>
+                        <span class="text-[10px] uppercase font-mono tracking-widest text-neutral-400 border border-neutral-800 px-2 py-0.5 rounded">Verified Construct</span>
                     </div>
-                    <p class="text-sm text-gray-400 mb-1">5-node Raspberry Pi hardware cluster processing compile requests via HAProxy least-conn routing.</p>
-                    <p class="text-xs text-gray-500">Stack: Raspberry Pi Cluster, HAProxy, Jobe</p>
+                    <h3 class="text-xl font-bold text-white">Distributed Execution Platform</h3>
+                    <p class="text-sm text-neutral-400">5-node physical Raspberry Pi cluster system context deploying load-balanced code execution threads via HAProxy[cite: 70].</p>
+                    <p class="text-xs font-mono text-neutral-600">Raspberry Pi Cluster, HAProxy, Jobe sandbox environment engine [cite: 70]</p>
                 </div>
             </div>
 
@@ -190,107 +217,134 @@
 
     </main>
 
-    <div id="yamin-container" class="fixed bottom-6 right-6 cursor-pointer z-50 flex flex-col items-center group">
-        <div id="yamin-speech" class="opacity-0 translate-y-2 transition-all duration-300 ease-in-out bg-white text-black text-xs font-bold px-3 py-1.5 rounded mb-2 shadow-lg pointer-events-none">
-            Hi! I'm Yamin 🐾
+    <div id="yamin-runner" class="cat-screen-runner cursor-pointer">
+        <div class="relative w-full h-full flex flex-col items-center">
+            <div id="yamin-bubble" class="opacity-0 scale-75 transition-all duration-300 ease-out bg-white text-black text-xs font-bold px-3 py-1 rounded-md mb-1 absolute -top-8 whitespace-nowrap shadow-xl pointer-events-none">
+                Hi! I'm Yamin 🐾
+            </div>
+            <svg class="w-14 h-14 text-white cat-gait-loop" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M20 55 Q 45 45 70 52 L 78 63 Q 50 61 22 66 Z"/>
+                <circle cx="76" cy="42" r="11"/>
+                <path d="M68 34 L 71 22 L 78 33 Z M77 33 L 82 22 L 87 34 Z"/>
+                <rect x="26" y="62" width="5" height="16" transform="rotate(-15 26 62)"/>
+                <rect x="38" y="62" width="5" height="13" transform="rotate(15 38 62)"/>
+                <rect x="62" y="62" width="5" height="16" transform="rotate(-10 62 62)"/>
+                <rect x="72" y="62" width="5" height="13" transform="rotate(10 72 62)"/>
+                <path d="M22 56 Q 10 50 4 38" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            </svg>
         </div>
-        <svg class="w-12 h-12 text-white yamin-body" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-1.5 5c-.83 0-1.5-.67-1.5-1.5S9.67 10 10.5 10s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3 0c-.83 0-1.5-.67-1.5-1.5S12.67 10 13.5 10s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-            <path d="M18.8 2.37L16.4 5.2c-1.3-.8-2.8-1.2-4.4-1.2s-3.1.4-4.4 1.2L5.2 2.37c-.3-.3-.8-.3-1.1 0-.3.3-.3.8 0 1.1l2 2.4c-1.9 1.9-3.1 4.5-3.1 7.4 0 5.5 4.5 10 10 10s10-4.5 10-10c0-2.9-1.2-5.5-3.1-7.4l2-2.4c.3-.3.3-.8 0-1.1-.3-.2-.8-.2-1.1 0zM12 21c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-            <path class="yamin-tail" d="M18 19c1.5 0 2.5-1 3-2.5.2-.6.4-2 .4-2s-.5.2-1 .5c-.8.5-1.5 1.5-2.4 1.5z"/>
-        </svg>
     </div>
 
+    <footer class="border-t border-neutral-950 bg-black py-8 text-center text-xs text-neutral-600 uppercase tracking-widest mt-12">
+        &copy; 2026 Madara. Core metrics active.
+    </footer>
+
     <script>
-        // Tab Navigation
+        // Copy Email to Clipboard Feature
+        function copyEmailToClipboard() {
+            const emailAddress = "mharishworkcyber@gmail.com";
+            navigator.clipboard.writeText(emailAddress).then(() => {
+                const textTarget = document.getElementById("email-text");
+                textTarget.textContent = "Copied Address!";
+                textTarget.style.color = "#ffffff";
+                
+                setTimeout(() => {
+                    textTarget.textContent = "Copy Email";
+                    textTarget.style.color = "";
+                }, 2500);
+            });
+        }
+
+        // Section View Management
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
             
-            const target = document.getElementById(tabId);
-            if (target) target.classList.add('active');
+            const selectedContent = document.getElementById(tabId);
+            if (selectedContent) selectedContent.classList.add('active');
 
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
                 btn.classList.remove('active-tab');
-                btn.classList.add('hover:text-white', 'text-gray-400');
+                btn.classList.add('text-neutral-500');
             });
 
-            const activeBtn = document.getElementById(`nav-${tabId}`);
-            if (activeBtn) {
-                activeBtn.classList.add('active-tab');
-                activeBtn.classList.remove('hover:text-white', 'text-gray-400');
+            const currentButton = document.getElementById(`nav-${tabId}`);
+            if (currentButton) {
+                currentButton.classList.add('active-tab');
+                currentButton.classList.remove('text-neutral-500');
             }
             window.scrollTo(0,0);
         }
 
-        // Yamin Interaction
-        document.getElementById('yamin-container').addEventListener('click', () => {
-            const speech = document.getElementById('yamin-speech');
-            speech.classList.remove('opacity-0', 'translate-y-2');
-            speech.classList.add('opacity-100', 'translate-y-0');
+        // Cat Click Voice Bubble Controller
+        document.getElementById('yamin-runner').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const speechBubble = document.getElementById('yamin-bubble');
+            speechBubble.classList.remove('opacity-0', 'scale-75');
+            speechBubble.classList.add('opacity-100', 'scale-100');
             
             setTimeout(() => {
-                speech.classList.remove('opacity-100', 'translate-y-0');
-                speech.classList.add('opacity-0', 'translate-y-2');
+                speechBubble.classList.remove('opacity-100', 'scale-100');
+                speechBubble.classList.add('opacity-0', 'scale-75');
             }, 3000);
         });
 
-        // Identity Typing (Harish <-> Madara)
+        // Identity Typer Logic
         const identities = ["M HARISH", "MADARA"];
-        let idIndex = 0, charIndex = 0, isDeleting = false;
+        let idIndex = 0, charIndex = 0, deletingIdentity = false;
         
         function typeIdentity() {
-            const currentName = identities[idIndex];
-            const el = document.getElementById("name-typing");
-            if (!el) return;
+            const labelStr = identities[idIndex];
+            const targetEl = document.getElementById("name-typing");
+            if (!targetEl) return;
             
-            if (isDeleting) {
-                el.textContent = currentName.substring(0, charIndex--);
+            if (deletingIdentity) {
+                targetEl.textContent = labelStr.substring(0, charIndex--);
             } else {
-                el.textContent = currentName.substring(0, charIndex++);
+                targetEl.textContent = labelStr.substring(0, charIndex++);
             }
             
-            let speed = isDeleting ? 50 : 120;
+            let cadence = deletingIdentity ? 60 : 140;
             
-            if (!isDeleting && charIndex > currentName.length) {
-                speed = 2500; 
-                isDeleting = true;
-            } else if (isDeleting && charIndex < 0) {
-                isDeleting = false;
+            if (!deletingIdentity && charIndex > labelStr.length) {
+                cadence = 2500; 
+                deletingIdentity = true;
+            } else if (deletingIdentity && charIndex < 0) {
+                deletingIdentity = false;
                 idIndex = (idIndex + 1) % identities.length;
-                speed = 600; 
+                cadence = 500; 
             }
-            setTimeout(typeIdentity, speed);
+            setTimeout(typeIdentity, cadence);
         }
 
-        // Role Typing
-        const roles = ["Cybersecurity Analyst", "DevSecOps Enthusiast", "Threat Modeler"];
-        let roleIndex = 0, roleCharIndex = 0, roleDeleting = false;
+        // Title Domain Role Typer 
+        const stringRoles = ["Cybersecurity Analyst"];
+        let rIndex = 0, rCharIdx = 0, deletingRole = false;
         
-        function typeRole() {
-            const currentRole = roles[roleIndex];
-            const el = document.getElementById("role-typing");
-            if (!el) return;
+        function typeRoles() {
+            const roleStr = stringRoles[rIndex];
+            const targetEl = document.getElementById("role-typing");
+            if (!targetEl) return;
             
-            if (roleDeleting) {
-                el.textContent = currentRole.substring(0, roleCharIndex--);
+            if (deletingRole) {
+                targetEl.textContent = roleStr.substring(0, rCharIdx--);
             } else {
-                el.textContent = currentRole.substring(0, roleCharIndex++);
+                targetEl.textContent = roleStr.substring(0, rCharIdx++);
             }
             
-            if (!roleDeleting && roleCharIndex > currentRole.length) {
-                setTimeout(() => roleDeleting = true, 2000);
-            } else if (roleDeleting && roleCharIndex < 0) {
-                roleDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
+            if (!deletingRole && rCharIdx > roleStr.length) {
+                setTimeout(() => deletingRole = true, 4000);
+            } else if (deletingRole && rCharIdx < 0) {
+                deletingRole = false;
+                rIndex = (rIndex + 1) % stringRoles.length;
             }
-            setTimeout(typeRole, roleDeleting ? 30 : 70);
+            setTimeout(typeRoles, deletingRole ? 40 : 80);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             typeIdentity();
-            typeRole();
+            typeRoles();
         });
     </script>
 </body>
