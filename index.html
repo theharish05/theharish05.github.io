@@ -321,8 +321,8 @@
             setTimeout(typeIdentity, cadence);
         }
 
-        // Sector Domain Subheader Typer
-        const stringRoles = ["Cybersecurity Analyst"];
+        // Sector Domain Multi-Role Typer Engine
+        const stringRoles = ["Cybersecurity Analyst", "DevOps Engineer", "Cloud Security Specialist"];
         let rIndex = 0, rCharIdx = 0, deletingRole = false;
         
         function typeRoles() {
@@ -336,13 +336,17 @@
                 targetEl.textContent = roleStr.substring(0, rCharIdx++);
             }
             
+            let timing = deletingRole ? 40 : 80;
+            
             if (!deletingRole && rCharIdx > roleStr.length) {
-                setTimeout(() => deletingRole = true, 4000);
+                timing = 3000; // Keep role readable on screen
+                deletingRole = true;
             } else if (deletingRole && rCharIdx < 0) {
                 deletingRole = false;
                 rIndex = (rIndex + 1) % stringRoles.length;
+                timing = 600; // Buffer window before typing next industry role
             }
-            setTimeout(typeRoles, deletingRole ? 40 : 80);
+            setTimeout(typeRoles, timing);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
