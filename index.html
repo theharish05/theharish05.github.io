@@ -74,7 +74,7 @@
                 <a href="https://github.com/theharish05" target="_blank" class="link-hover text-white">[ GitHub ]</a>
                 <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover text-white">[ LinkedIn ]</a>
                 <button onclick="copyEmailToClipboard()" class="link-hover text-white focus:outline-none">
-                    [ <span id="email-text">Email</span> ]
+                    [ <span id="email-text">EMAIL</span> ]
                 </button>
             </div>
         </section>
@@ -151,7 +151,7 @@
                     <a href="https://drive.google.com/file/d/1GoVOKO_U61S7BuMJRJrnBpR0GCQ1uiiV/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical Web Hacking ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1yU2A26wr1fPcIg-ZE44sT0-z1SesW0zz/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical API Hacking ]</span> <span>↗</span></a>
                     <a href="https://www.linkedin.com/posts/m-harish-318068286_cybersecurity-isc2-professionaldevelopment-activity-7246134310653583360-A20P" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ ISC2 Certification ]</span> <span>↗</span></a>
-                    <a href="https://drive.google.com/file/d/1VbY8RAtR__87cjWFmYWrU0jxwEzL7SNk/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Python 101 for Hackers ]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1GoVOKO_U61S7BuMJRJrnBpR0GCQ1uiiV/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Python 101 for Hackers ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1dl0tN-Q-XeM0O9W-sdvbPbdK6lOxemC0/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TryHackMe Advent of Cyber 2024 ]</span> <span>↗</span></a>
                 </div>
             </div>
@@ -163,6 +163,22 @@
             <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Engineering & Architecture</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between md:col-span-2">
+                    <div class="space-y-2">
+                        <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Ingestion_High_Throughput</div>
+                        <h3 class="text-xl font-bold text-white">
+                            <a href="https://github.com/theharish05/IMS" target="_blank" class="hover:underline">Incident Management System (IMS) ↗</a>
+                        </h3>
+                        <p class="text-sm text-neutral-400 mt-2">
+                            A production-grade, event-driven microservices architecture built to ingest, debounce, and process bursts of 10,000+ unstructured application error logs/sec. Integrates a distributed 3-node Kafka consensus cluster (KRaft mode) linked with polyglot routing strategies to optimize data pipelines under intensive stress constraints.
+                        </p>
+                        <p class="text-sm text-neutral-400 mt-1">
+                            Features Redis token caching for 10s backpressure deduplication boundaries, complete pipeline auditing via a scale-optimized MongoDB telemetry data lake, and transactional, State-pattern workflow compliance within a PostgreSQL engine.
+                        </p>
+                    </div>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">FastAPI, Uvicorn replicas, Apache Kafka (KRaft), Nginx, Redis, MongoDB, PostgreSQL, Docker Compose, React</p>
+                </div>
+
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Network_Defense</div>
@@ -236,7 +252,7 @@
                 textTarget.style.color = "#ffffff";
                 
                 setTimeout(() => {
-                    textTarget.textContent = "Email";
+                    textTarget.textContent = "EMAIL";
                     textTarget.style.color = "";
                 }, 2500);
             });
