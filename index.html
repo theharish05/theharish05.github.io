@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html { scroll-behavior: smooth; background-color: #000; }
-        body { background-color: #000; font-family: 'Courier New', Courier, monospace; color: #b5b5b5; line-height: 1.7; }
+        body { background-color: #000; font-family: 'Courier New', Courier, monospace; color: #b5b5b5; line-height: 1.7; text-shadow: 0 0 1px rgba(0,0,0,1); }
         
         .link-hover { text-decoration: none; color: #a3a3a3; transition: all 0.2s ease-in-out; }
         .link-hover:hover { color: #ffffff; }
@@ -44,8 +44,10 @@
 </head>
 <body class="min-h-screen flex flex-col relative text-lg">
 
+    <!-- Subtle Digital Grid Background -->
     <div class="digital-bg"></div>
 
+    <!-- Minimal Header Nav Area -->
     <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900">
         <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
         <div class="flex gap-8 text-sm uppercase tracking-widest">
@@ -55,8 +57,10 @@
         </div>
     </nav>
 
+    <!-- Main Content Body -->
     <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12">
         
+        <!-- HOME SECTION -->
         <section id="home" class="tab-content active space-y-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white tracking-widest uppercase mb-4">
                 <span id="name-typing"></span><span class="cursor-blink">_</span>
@@ -67,20 +71,23 @@
             </p>
             
             <p class="text-neutral-300 text-lg max-w-3xl leading-relaxed">
-                Cybersecurity undergraduate specializing in defensive and offensive security operations mixed with DevOps and cloud systems. Armed with hands-on foundations in network defense, vulnerability assessments, and CI/CD logging workflows, my background brings an essential layer of security awareness to everything I build—from testing architecture to provisioning automated cloud environments.
+                Cybersecurity undergraduate specializing in defensive and offensive security operations mixed with DevOps and cloud systems[cite: 1, 2]. Armed with hands-on foundations in network defense, vulnerability assessments, and CI/CD logging workflows, my background brings an essential layer of security awareness to everything I build—from testing architecture to provisioning automated cloud environments[cite: 1, 2].
             </p>
             
+            <!-- Quick Link Hub -->
             <div class="flex flex-wrap items-center gap-8 pt-8 text-base uppercase tracking-widest font-bold">
                 <a href="https://github.com/theharish05" target="_blank" class="link-hover text-white">[ GitHub ]</a>
                 <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover text-white">[ LinkedIn ]</a>
                 <button onclick="copyEmailToClipboard()" class="link-hover text-white focus:outline-none">
-                    [ <span id="email-text">EMAIL</span> ]
+                    [ <span id="email-text">Email</span> ]
                 </button>
             </div>
         </section>
 
+        <!-- ABOUT & SKILLS SECTION -->
         <section id="about" class="tab-content space-y-14">
             
+            <!-- Internships Timeline -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Experience</h2>
                 <div class="grid grid-cols-1 gap-6">
@@ -89,8 +96,8 @@
                             <span>ISRO Internship</span> 
                             <span class="text-sm font-normal text-neutral-500 font-mono">12/2025 — 01/2026</span>
                         </div>
-                        <p class="text-sm text-neutral-500 font-mono mt-1">Tirunelveli</p>
-                        <div class="text-neutral-400 mt-3 text-base leading-relaxed">Analyzed complex network segmentation and enforced stringent access control policies while executing rigorous security workflows to maintain the integrity of research-driven organizational infrastructure.</div>
+                        <p class="text-sm text-neutral-500 font-mono mt-1">Tirunelveli[cite: 1]</p>
+                        <div class="text-neutral-400 mt-3 text-base leading-relaxed">Analyzed complex network segmentation and enforced stringent access control policies while executing rigorous security workflows to maintain the integrity of research-driven organizational infrastructure[cite: 1].</div>
                     </div>
                     
                     <div class="interactive-card bg-neutral-950/30 p-6 rounded-md">
@@ -98,49 +105,54 @@
                             <span>Shadow Fox</span> 
                             <span class="text-sm font-normal text-neutral-500 font-mono">05/2024 — 06/2024</span>
                         </div>
-                        <div class="text-neutral-400 mt-3 text-base leading-relaxed">Identified and mitigated security flaws through hands-on system monitoring and rigorous vulnerability analysis, ensuring robust defense across diverse challenge scenarios.</div>
+                        <div class="text-neutral-400 mt-3 text-base leading-relaxed">Identified and mitigated security flaws through hands-on system monitoring and rigorous vulnerability analysis, ensuring robust defense across diverse challenge scenarios[cite: 1].</div>
                     </div>
                 </div>
             </div>
 
+            <!-- Competitive Wins -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Achievements & CTFs</h2>
                 <div class="grid grid-cols-1 gap-4 text-base font-mono">
                     <a href="https://drive.google.com/file/d/1X1kC-cctN3smT0m19Y9zYqTgF17cuViR/view?usp=sharing" target="_blank" class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center group">
-                        <span><strong class="text-white">RUNNER UP</strong> — L3M0n CTF (Amrita Vishwa Vidyapeetham)</span>
+                        <span><strong class="text-white">RUNNER UP</strong> — L3M0n CTF (Amrita Vishwa Vidyapeetham)[cite: 1]</span>
                         <span class="text-neutral-500 group-hover:text-white transition-colors">↗</span>
                     </a>
                     <div class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center">
                         <span><strong class="text-white">RANK 9</strong> — YUGAM CTF (Kumaraguru College of Engineering)</span>
                     </div>
                     <a href="https://www.linkedin.com/posts/m-harish-318068286_ctf-hackquest2k25-cybersecurity-activity-7297214536015613952-o621" target="_blank" class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center group">
-                        <span><strong class="text-white">TOP 30</strong> — Hack Quest 2k24 (HackQuest & JMC, Trichy)</span>
+                        <span><strong class="text-white">TOP 30</strong> — Hack Quest 2k24 (HackQuest & JMC, Trichy)[cite: 1]</span>
                         <span class="text-neutral-500 group-hover:text-white transition-colors">↗</span>
                     </a>
                 </div>
             </div>
 
+            <!-- Technical Skills Matrix -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Technical Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base">
+                    <!-- Cyber Security Block -->
                     <div class="interactive-card bg-neutral-950/20 p-6 rounded-md space-y-3">
                         <h3 class="text-white font-bold uppercase tracking-wider text-sm border-b border-neutral-900 pb-2 mb-2">// Cybersecurity</h3>
-                        <p><strong class="text-neutral-400">SOC & Monitoring:</strong> SIEM, Splunk - Basics, Wireshark, IDS, Alert Analysis.</p>
-                        <p><strong class="text-neutral-400">Red Teaming:</strong> Ethical Hacking.</p>
-                        <p><strong class="text-neutral-400">Security Tools:</strong> Burp Suite, Nessus, Nikto, Hydra, Ghidra.</p>
-                        <p><strong class="text-neutral-400">Languages:</strong> Python, Bash, Java, C, SQL.</p>
-                        <p><strong class="text-neutral-400">Technologies/Framework:</strong> Linux, Git, MongoDB, VS Code.</p>
+                        <p><strong class="text-neutral-400">SOC & Monitoring:</strong> SIEM, Splunk - Basics, Wireshark, IDS, Alert Analysis[cite: 1].</p>
+                        <p><strong class="text-neutral-400">Red Teaming:</strong> Ethical Hacking[cite: 1].</p>
+                        <p><strong class="text-neutral-400">Security Tools:</strong> Burp Suite, Nessus, Nikto, Hydra, Ghidra[cite: 1].</p>
+                        <p><strong class="text-neutral-400">Languages:</strong> Python, Bash, Java, C, SQL[cite: 1, 2].</p>
+                        <p><strong class="text-neutral-400">Technologies/Framework:</strong> Linux, Git, MongoDB, VS Code[cite: 1, 2].</p>
                     </div>
                     
+                    <!-- DevOps Block -->
                     <div class="interactive-card bg-neutral-950/20 p-6 rounded-md space-y-3 flex flex-col justify-start">
                         <h3 class="text-white font-bold uppercase tracking-wider text-sm border-b border-neutral-900 pb-2 mb-2">// DevOps & Cloud</h3>
-                        <p><strong class="text-neutral-400">DevOps & CI/CD:</strong> Docker, Kubernetes, Jenkins, GitHub, Ansible.</p>
-                        <p><strong class="text-neutral-400">Cloud:</strong> AWS (EC2, S3, IAM, EKS, ECR, ECS, VPC), Terraform.</p>
-                        <p><strong class="text-neutral-400">Monitoring:</strong> Prometheus, Grafana, Splunk (Foundational).</p>
+                        <p><strong class="text-neutral-400">DevOps & CI/CD:</strong> Docker, Kubernetes, Jenkins, GitHub, Ansible[cite: 2].</p>
+                        <p><strong class="text-neutral-400">Cloud:</strong> AWS (EC2, S3, IAM, EKS, ECR, ECS, VPC), Terraform[cite: 2].</p>
+                        <p><strong class="text-neutral-400">Monitoring:</strong> Prometheus, Grafana, Splunk (Foundational)[cite: 2].</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Verified Credentials Portfolio Section -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Certifications</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-mono">
@@ -151,110 +163,89 @@
                     <a href="https://drive.google.com/file/d/1GoVOKO_U61S7BuMJRJrnBpR0GCQ1uiiV/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical Web Hacking ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1yU2A26wr1fPcIg-ZE44sT0-z1SesW0zz/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical API Hacking ]</span> <span>↗</span></a>
                     <a href="https://www.linkedin.com/posts/m-harish-318068286_cybersecurity-isc2-professionaldevelopment-activity-7246134310653583360-A20P" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ ISC2 Certification ]</span> <span>↗</span></a>
-                    <a href="https://drive.google.com/file/d/1GoVOKO_U61S7BuMJRJrnBpR0GCQ1uiiV/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Python 101 for Hackers ]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1VbY8RAtR__87cjWFmYWrU0jxwEzL7SNk/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Python 101 for Hackers ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1dl0tN-Q-XeM0O9W-sdvbPbdK6lOxemC0/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TryHackMe Advent of Cyber 2024 ]</span> <span>↗</span></a>
                 </div>
             </div>
 
         </section>
 
+        <!-- PROJECTS SECTION -->
         <section id="projects" class="tab-content space-y-10">
             
             <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Engineering & Architecture</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between md:col-span-2">
+                <!-- Proj 1 -->
+                <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Network_Defense</div>
                         <h3 class="text-xl font-bold text-white">
                             <a href="https://github.com/Kira-007/Intrusion-Detection-System" target="_blank" class="hover:underline">Intrusion Detection System ↗</a>
                         </h3>
-                        <p class="text-sm text-neutral-400 mt-2">Real-time deep network packet layer capture scripts built to process alerts and flag threat anomalies across enterprise parameters.</p>
+                        <p class="text-sm text-neutral-400">Real-time deep network packet layer capture scripts built to process alerts[cite: 1].</p>
                     </div>
-                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Scapy, PySide6</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Scapy, PySide6[cite: 1]</p>
                 </div>
 
+                <!-- Proj 2 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Assessment_Eng</div>
                         <h3 class="text-xl font-bold text-white">
                             <a href="https://github.com/theharish05/Agentless-Vulnerability-Scanner-For-Windows" target="_blank" class="hover:underline">Agentless Windows Scanner ↗</a>
                         </h3>
-                        <p class="text-sm text-neutral-400 mt-2">Local auditing engine tracing dynamic system flaws against real-time API vulnerability indices without resource footprint overhead.</p>
+                        <p class="text-sm text-neutral-400">Local auditing engine tracing dynamic system flaws against real-time API vulnerability indices[cite: 1].</p>
                     </div>
-                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, PySide6, Nmap, Requests</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, PySide6, Nmap, Requests[cite: 1]</p>
                 </div>
 
+                <!-- Proj 3 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Pipeline_Security</div>
                         <h3 class="text-xl font-bold text-white">
                             <a href="https://github.com/Manikandan23005/CI-CD-pipeline-Failure-Analyzer" target="_blank" class="hover:underline">CI/CD Failure Analyzer ↗</a>
                         </h3>
-                        <p class="text-sm text-neutral-400 mt-2">Integrated Jenkins system logging architectures parsing build traces into clean visual error tables for predictive security modeling.</p>
+                        <p class="text-sm text-neutral-400">Integrated Jenkins system logging architectures parsing build traces into clean visual error tables[cite: 2].</p>
                     </div>
-                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Jenkins, Docker</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Jenkins, Docker[cite: 2]</p>
                 </div>
 
+                <!-- Proj 4 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Clouds_IaC</div>
                         <h3 class="text-xl font-bold text-white">
                             <a href="https://github.com/theharish05/Terraform-AWS-Infrastructure-Automation" target="_blank" class="hover:underline">AWS Infra Automation ↗</a>
                         </h3>
-                        <p class="text-sm text-neutral-400 mt-2">Declarative components deploying sandboxed multi-zone networks and tightly monitored cloud configuration layers.</p>
+                        <p class="text-sm text-neutral-400">Declarative components deploying sandboxed multi-zone networks and cloud configurations[cite: 2].</p>
                     </div>
-                    <p class="text-xs font-mono text-neutral-600 mt-4">Terraform, AWS (EC2, S3, VPC)</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Terraform, AWS (EC2, S3, VPC)[cite: 2]</p>
                 </div>
 
-                <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
-                    <div class="space-y-2">
-                        <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Ingestion_High_Throughput</div>
-                        <h3 class="text-xl font-bold text-white">
-                            <a href="https://github.com/theharish05/IMS" target="_blank" class="hover:underline">Incident Management System (IMS) ↗</a>
-                        </h3>
-                        <p class="text-sm text-neutral-400 mt-2">Production-grade event-driven architecture orchestrating 3-node KRaft Kafka brokers and Uvicorn replicas to ingest 10,000+ logs/sec with 10s Redis caching boundaries.</p>
-                    </div>
-                    <p class="text-xs font-mono text-neutral-600 mt-4">FastAPI, Apache Kafka, Redis, MongoDB, PostgreSQL, React</p>
-                </div>
-
+                <!-- Proj 5 Cluster (Updated Title Reference) -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Bare_Metal_Hardware</span>
                         <span class="text-[10px] uppercase font-mono tracking-widest text-neutral-400 border border-neutral-800 px-2 py-0.5 rounded">Verified Construct</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white">Distributed Multi-Language Execution Platform</h3>
-                    <p class="text-sm text-neutral-400">5-node physical Raspberry Pi cluster system context deploying load-balanced code execution threads via HAProxy with granular telemetry tracking configurations.</p>
-                    <p class="text-xs font-mono text-neutral-600">Raspberry Pi Cluster, HAProxy, Jobe sandbox environment engine, Nginx, Apache2</p>
+                    <h3 class="text-xl font-bold text-white">Multi-Language Execution Distributer</h3>
+                    <p class="text-sm text-neutral-400">5-node physical Raspberry Pi cluster system context deploying load-balanced code execution threads via HAProxy[cite: 2].</p>
+                    <p class="text-xs font-mono text-neutral-600">Raspberry Pi Cluster, HAProxy, Jobe sandbox environment engine, Nginx, Apache2[cite: 2]</p>
                 </div>
-
-                <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 flex flex-col justify-between">
-                    <div class="space-y-2">
-                        <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Offense_Research_Crypto</div>
-                        <h3 class="text-xl font-bold text-white">
-                            <a href="https://github.com/theharish05/Cryptanalyzer" target="_blank" class="hover:underline">Cryptanalyzer Analysis Toolkit ↗</a>
-                        </h3>
-                        <p class="text-sm text-neutral-400 mt-2">
-                            A dual-interface (Flask Web UI & CLI) automation toolkit designed to auditing vulnerabilities within production cryptographic setups. Features functional execution modules running automated RSA key extraction, FactorDB weak moduli factorization, AES Chosen Plaintext Attacks (CPA), and Padding Oracle exploit surfaces via pwntools integrations.
-                        </p>
-                        <p class="text-sm text-neutral-400 mt-1">
-                            Equipped with high-velocity mathematical dictionary tools, HMAC brute-forcing, rainbow table builders for multi-algorithm variants (MD5, SHA1, SHA256), and automated validation tests.
-                        </p>
-                    </div>
-                    <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, PyCryptodome, pwntools, gmpy2, FactorDB, HTML5/CSS3</p>
-                </div>
-
             </div>
 
         </section>
 
     </main>
 
+    <!-- Footer System Area -->
     <footer class="border-t border-neutral-950 bg-black py-8 text-center text-xs text-neutral-600 uppercase tracking-widest mt-12">
         &copy; 2026 Madara. Core metrics active.
     </footer>
 
+    <!-- Script Logic Controllers -->
     <script>
         // Copy Email to Clipboard Feature with State Updates
         function copyEmailToClipboard() {
@@ -265,7 +256,7 @@
                 textTarget.style.color = "#ffffff";
                 
                 setTimeout(() => {
-                    textTarget.textContent = "EMAIL";
+                    textTarget.textContent = "Email";
                     textTarget.style.color = "";
                 }, 2500);
             });
@@ -321,7 +312,7 @@
             setTimeout(typeIdentity, cadence);
         }
 
-        // Sector Domain Multi-Role Typer Engine
+        // Sector Domain Subheader Typer
         const stringRoles = ["Cybersecurity Analyst", "DevOps Engineer"];
         let rIndex = 0, rCharIdx = 0, deletingRole = false;
         
@@ -339,12 +330,12 @@
             let timing = deletingRole ? 40 : 80;
             
             if (!deletingRole && rCharIdx > roleStr.length) {
-                timing = 3000; // Keep role readable on screen
+                timing = 3000; 
                 deletingRole = true;
             } else if (deletingRole && rCharIdx < 0) {
                 deletingRole = false;
                 rIndex = (rIndex + 1) % stringRoles.length;
-                timing = 600; // Buffer window before typing next industry role
+                timing = 600; 
             }
             setTimeout(typeRoles, timing);
         }
