@@ -40,6 +40,19 @@
             border-color: #ffffff;
             box-shadow: 0 12px 24px rgba(255,255,255,0.08); 
         }
+
+        /* Hardware Image Hover Mechanics */
+        .hardware-gallery {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out, margin-top 0.4s ease-in-out;
+        }
+        .interactive-card:hover .hardware-gallery {
+            max-height: 400px;
+            opacity: 1;
+            margin-top: 1.5rem;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col relative text-lg">
@@ -79,7 +92,7 @@
                 <a href="https://github.com/theharish05" target="_blank" class="link-hover text-white">[ GitHub ]</a>
                 <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover text-white">[ LinkedIn ]</a>
                 <button onclick="copyEmailToClipboard()" class="link-hover text-white focus:outline-none">
-                    [ <span id="email-text">EMAIL</span> ]
+                    [ <span id="email-text">Email</span> ]
                 </button>
             </div>
         </section>
@@ -224,21 +237,36 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Terraform, AWS (EC2, S3, VPC)</p>
                 </div>
 
-                <!-- Proj 5 Cluster (Updated Title Reference) -->
+                <!-- Proj 5 Cluster -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Bare_Metal_Hardware</span>
-                        <span class="text-[10px] uppercase font-mono tracking-widest text-neutral-400 border border-neutral-800 px-2 py-0.5 rounded">Verified Construct</span>
+                        <span class="text-[10px] uppercase font-mono tracking-widest text-neutral-400 border border-neutral-800 px-2 py-0.5 rounded">Hover to View Stack</span>
                     </div>
                     <h3 class="text-xl font-bold text-white">Multi-Language Execution Distributer</h3>
                     <p class="text-sm text-neutral-400">5-node physical Raspberry Pi cluster system context deploying load-balanced code execution threads via HAProxy.</p>
                     <p class="text-xs font-mono text-neutral-600">Raspberry Pi Cluster, HAProxy, Jobe sandbox environment engine, Nginx, Apache2</p>
+                    
+                    <!-- Sliding Image Gallery Container -->
+                    <div class="hardware-gallery grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="https://drive.google.com/file/d/1ztrLmK4mwB3elMed_jIuDiuFCpD15wvM/view?usp=sharing" target="_blank" class="block border border-neutral-800 overflow-hidden rounded bg-black">
+                            <img src="https://lh3.googleusercontent.com/d/1ztrLmK4mwB3elMed_jIuDiuFCpD15wvM" alt="Raspberry Pi Hardware Cluster View 1" class="w-full h-48 object-cover opacity-80 hover:opacity-100 transition-opacity duration-300" onerror="this.src='https://images.unsplash.com/photo-1601524909162-be87252be298?auto=format&fit=crop&w=600&q=80'">
+                        </a>
+                        <a href="https://drive.google.com/file/d/1L6SLcJ_BzPo8O1GOzJXqcIicfNuKEbrd/view?usp=sharing" target="_blank" class="block border border-neutral-800 overflow-hidden rounded bg-black">
+                            <img src="https://lh3.googleusercontent.com/d/1L6SLcJ_BzPo8O1GOzJXqcIicfNuKEbrd" alt="Raspberry Pi Hardware Cluster View 2" class="w-full h-48 object-cover opacity-80 hover:opacity-100 transition-opacity duration-300" onerror="this.src='https://images.unsplash.com/photo-1601524909162-be87252be298?auto=format&fit=crop&w=600&q=80'">
+                        </a>
+                    </div>
                 </div>
             </div>
 
         </section>
 
     </main>
+
+    <!-- Footer System Area -->
+    <footer class="border-t border-neutral-950 bg-black py-8 text-center text-xs text-neutral-600 uppercase tracking-widest mt-12">
+        &copy; 2026 Madara. Core metrics active.
+    </footer>
 
     <!-- Script Logic Controllers -->
     <script>
