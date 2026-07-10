@@ -41,7 +41,7 @@
             box-shadow: 0 12px 24px rgba(255,255,255,0.08); 
         }
 
-        /* Hardware Image Hover Mechanics - Smooth Height Auto Rollout */
+        /* Hardware Image Hover Mechanics */
         .hardware-gallery {
             max-height: 0;
             opacity: 0;
@@ -57,10 +57,8 @@
 </head>
 <body class="min-h-screen flex flex-col relative text-lg">
 
-    <!-- Subtle Digital Grid Background -->
     <div class="digital-bg"></div>
 
-    <!-- Minimal Header Nav Area -->
     <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900">
         <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
         <div class="flex gap-8 text-sm uppercase tracking-widest">
@@ -70,10 +68,8 @@
         </div>
     </nav>
 
-    <!-- Main Content Body -->
     <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12">
         
-        <!-- HOME SECTION -->
         <section id="home" class="tab-content active space-y-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white tracking-widest uppercase mb-4">
                 <span id="name-typing"></span><span class="cursor-blink">_</span>
@@ -87,21 +83,17 @@
                 Cybersecurity undergraduate specializing in defensive and offensive security operations mixed with DevOps and cloud systems. Armed with hands-on foundations in network defense, vulnerability assessments, and CI/CD logging workflows, my background brings an essential layer of security awareness to everything I build—from testing architecture to provisioning automated cloud environments.
             </p>
             
-            <!-- Quick Link Hub -->
             <div class="flex flex-wrap items-center gap-6 pt-8 text-base uppercase tracking-widest font-bold">
                 <a href="https://github.com/theharish05" target="_blank" class="link-hover text-white">[ GitHub ]</a>
                 <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover text-white">[ LinkedIn ]</a>
                 <button onclick="copyEmailToClipboard()" class="link-hover text-white focus:outline-none">
                     [ <span id="email-text">Email</span> ]
                 </button>
-                <a href="M_Harish.pdf" download class="link-hover text-neutral-400 font-normal text-sm normal-case tracking-normal hover:text-white">[ Download Resume.pdf ]</a>
             </div>
         </section>
 
-        <!-- ABOUT & SKILLS SECTION -->
         <section id="about" class="tab-content space-y-14">
             
-            <!-- Internships Timeline -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Experience</h2>
                 <div class="grid grid-cols-1 gap-6">
@@ -124,7 +116,6 @@
                 </div>
             </div>
 
-            <!-- Competitive Wins -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Achievements & CTFs</h2>
                 <div class="grid grid-cols-1 gap-4 text-base font-mono">
@@ -142,11 +133,9 @@
                 </div>
             </div>
 
-            <!-- Technical Skills Matrix -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Technical Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base">
-                    <!-- Cyber Security Block -->
                     <div class="interactive-card bg-neutral-950/20 p-6 rounded-md space-y-3">
                         <h3 class="text-white font-bold uppercase tracking-wider text-sm border-b border-neutral-900 pb-2 mb-2">// Cybersecurity</h3>
                         <p><strong class="text-neutral-400">SOC & Monitoring:</strong> SIEM, Splunk - Basics, Wireshark, IDS, Alert Analysis.</p>
@@ -156,17 +145,15 @@
                         <p><strong class="text-neutral-400">Technologies/Framework:</strong> Linux, Git, MongoDB, VS Code.</p>
                     </div>
                     
-                    <!-- DevOps Block (Updated via M_Harish.pdf layout targets) -->
                     <div class="interactive-card bg-neutral-950/20 p-6 rounded-md space-y-3 flex flex-col justify-start">
                         <h3 class="text-white font-bold uppercase tracking-wider text-sm border-b border-neutral-900 pb-2 mb-2">// DevOps & Cloud Architecture</h3>
-                        <p><strong class="text-neutral-400">DevOps & CI/CD:</strong> Docker, Kubernetes (EKS/KinD), Helm, ArgoCD (GitOps), Jenkins, GitHub Actions, Ansible[cite: 3].</p>
-                        <p><strong class="text-neutral-400">Cloud & IaC:</strong> AWS (EC2, S3, IAM, EKS, ECR, ECS, VPC, DynamoDB, Secrets Manager, IRSA, OIDC), Terraform, Terragrunt[cite: 3].</p>
-                        <p><strong class="text-neutral-400">Observability:</strong> Prometheus, Grafana, Loki, Alloy, Tempo[cite: 3].</p>
+                        <p><strong class="text-neutral-400">DevOps & CI/CD:</strong> Docker, Kubernetes (EKS/KinD), Helm, ArgoCD (GitOps), Jenkins, GitHub Actions, Ansible.</p>
+                        <p><strong class="text-neutral-400">Cloud & IaC:</strong> AWS (EC2, S3, IAM, EKS, ECR, ECS, VPC, DynamoDB, Secrets Manager, IRSA, OIDC), Terraform, Terragrunt.</p>
+                        <p><strong class="text-neutral-400">Monitoring & Observability:</strong> Prometheus, Grafana, Loki, Alloy, Tempo.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Verified Credentials Portfolio Section -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Certifications</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-mono">
@@ -182,15 +169,23 @@
                 </div>
             </div>
 
+            <div class="space-y-6">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Curriculum Vitae</h2>
+                <div class="grid grid-cols-1 gap-4 text-base font-mono">
+                    <a href="https://drive.google.com/file/d/1bOXD1II1mA2nYq8mO6kO9L4EPpL3pG3n/view?usp=sharing" target="_blank" class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center group">
+                        <span><strong class="text-white">VIEW FULL RESUME</strong> — Google Drive Cloud Storage</span>
+                        <span class="text-neutral-500 group-hover:text-white transition-colors">↗</span>
+                    </a>
+                </div>
+            </div>
+
         </section>
 
-        <!-- PROJECTS SECTION -->
         <section id="projects" class="tab-content space-y-10">
             
             <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Engineering & Architecture</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Proj 1 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Network_Defense</div>
@@ -202,7 +197,6 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Scapy, PySide6</p>
                 </div>
 
-                <!-- Proj 2 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Assessment_Eng</div>
@@ -214,7 +208,6 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Python, PySide6, Nmap, Requests</p>
                 </div>
 
-                <!-- Proj 3 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Pipeline_Security</div>
@@ -226,7 +219,6 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Jenkins, Docker</p>
                 </div>
 
-                <!-- Proj 4 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Clouds_IaC</div>
@@ -238,7 +230,6 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Terraform, AWS (EC2, S3, VPC)</p>
                 </div>
 
-                <!-- Proj 5 Cluster -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Bare_Metal_Hardware</span>
@@ -258,14 +249,13 @@
                     </div>
                 </div>
 
-                <!-- Proj 7 Infrastructure (New Integration Targeted From Update) -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Enterprise_Isolation_Segmentation</div>
                         <h3 class="text-xl font-bold text-white">Research Lab Isolated Network Infrastructure</h3>
-                        <p class="text-sm text-neutral-400 mt-2">Designed and deployed an isolated, air-gapped network for a Cloud Computing & Cyber Security Research Lab supporting 30+ interconnected endpoints[cite: 3]. Configured strict network segmentation, access control policies, and secure inter-device routing to maintain precise environmental control over research data[cite: 3].</p>
+                        <p class="text-sm text-neutral-400 mt-2">Designed and deployed an isolated, air-gapped network for a Cloud Computing & Cyber Security Research Lab supporting 30+ interconnected endpoints. Configured strict network segmentation, access control policies, and secure inter-device routing to maintain precise environmental control over research data.</p>
                     </div>
-                    <p class="text-xs font-mono text-neutral-600 mt-4">Fortinet, CISCO Networks[cite: 3]</p>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">Fortinet, CISCO Networks</p>
                 </div>
             </div>
 
@@ -273,7 +263,10 @@
 
     </main>
 
-    <!-- Script Logic Controllers -->
+    <footer class="border-t border-neutral-950 bg-black py-8 text-center text-xs text-neutral-600 uppercase tracking-widest mt-12">
+        &copy; 2026 Madara. Core metrics active.
+    </footer>
+
     <script>
         // Copy Email to Clipboard Feature with State Updates
         function copyEmailToClipboard() {
