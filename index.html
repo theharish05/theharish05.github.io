@@ -22,6 +22,13 @@
             background-size: 60px 60px;
         }
 
+        /* Canvas Backdrop Matrix Style for Contact View */
+        #matrix-canvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; opacity: 0.15; pointer-events: none; display: none;
+        }
+        .contact-relative { position: relative; overflow: hidden; }
+
         /* Animations */
         .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
         .tab-content.active { display: block; }
@@ -57,15 +64,17 @@
 </head>
 <body class="min-h-screen flex flex-col relative text-lg">
 
+    <!-- Subtle Digital Grid Background -->
     <div class="digital-bg"></div>
 
     <!-- Minimal Header Nav Area -->
     <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900">
         <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
-        <div class="flex gap-8 text-sm uppercase tracking-widest">
+        <div class="flex gap-8 text-sm uppercase tracking-widest flex-wrap">
             <button onclick="switchTab('home')" id="nav-home" class="nav-btn active-tab transition-all">Home</button>
             <button onclick="switchTab('about')" id="nav-about" class="nav-btn hover:text-white text-neutral-500 transition-all">About & Skills</button>
             <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn hover:text-white text-neutral-500 transition-all">Projects</button>
+            <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn hover:text-white text-neutral-500 transition-all">Contact</button>
         </div>
     </nav>
 
@@ -85,15 +94,6 @@
             <p class="text-neutral-300 text-lg max-w-3xl leading-relaxed">
                 Cybersecurity undergraduate specializing in defensive and offensive security operations mixed with DevOps and cloud systems. Armed with hands-on foundations in network defense, vulnerability assessments, and CI/CD logging workflows, my background brings an essential layer of security awareness to everything I build—from testing architecture to provisioning automated cloud environments.
             </p>
-            
-            <!-- Quick Link Hub -->
-            <div class="flex flex-wrap items-center gap-6 pt-8 text-base uppercase tracking-widest font-bold">
-                <a href="https://github.com/theharish05" target="_blank" class="link-hover text-white">[ GitHub ]</a>
-                <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover text-white">[ LinkedIn ]</a>
-                <button onclick="copyEmailToClipboard()" class="link-hover text-white focus:outline-none">
-                    [ <span id="email-text">Email</span> ]
-                </button>
-            </div>
         </section>
 
         <!-- ABOUT & SKILLS SECTION -->
@@ -199,7 +199,7 @@
             <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Engineering & Architecture</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Proj 6: GitOps Microservices (New Integration) -->
+                <!-- Proj 6: GitOps Microservices -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// GitOps_Platform_Engineering</div>
@@ -292,6 +292,58 @@
 
         </section>
 
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="tab-content space-y-10 contact-relative">
+            <canvas id="matrix-canvas"></canvas>
+            
+            <div class="relative z-10 space-y-8">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Secure Communications Link</h2>
+                
+                <!-- Communication Link Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono">
+                    <a href="https://github.com/theharish05" target="_blank" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-start group">
+                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-2">// Source_Code</span>
+                        <span class="text-white font-bold text-lg group-hover:underline">GitHub ↗</span>
+                    </a>
+                    
+                    <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-start group">
+                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-2">// Professional_Net</span>
+                        <span class="text-white font-bold text-lg group-hover:underline">LinkedIn ↗</span>
+                    </a>
+                    
+                    <button onclick="copyEmailToClipboard()" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-start group text-left w-full focus:outline-none">
+                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-2">// Direct_Mail</span>
+                        <span id="contact-email-text" class="text-white font-bold text-lg group-hover:underline">Email ↗</span>
+                    </button>
+                </div>
+
+                <!-- Interactive Terminal Message Console -->
+                <div class="border border-neutral-900 bg-neutral-950/60 rounded-md p-6 font-mono text-sm space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between text-neutral-500 text-xs uppercase border-b border-neutral-900 pb-2">
+                        <span>Terminal Message Console v1.0.4</span>
+                        <span class="text-emerald-500">Ready_</span>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-neutral-400">guest@madara-ops:~$ <span class="text-white">sendmail --init</span></p>
+                        <p class="text-neutral-500">Initializing message tunnel variables...</p>
+                    </div>
+                    <div class="space-y-3 pt-2">
+                        <div>
+                            <label class="block text-neutral-400 mb-1">Return_Path (Your Email):</label>
+                            <input type="email" placeholder="anonymous@domain.xyz" class="w-full bg-black border border-neutral-800 rounded px-3 py-2 text-white focus:outline-none focus:border-neutral-400 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-neutral-400 mb-1">Payload_Data (Your Message):</label>
+                            <textarea rows="4" placeholder="Enter secure transmission payload..." class="w-full bg-black border border-neutral-800 rounded px-3 py-2 text-white focus:outline-none focus:border-neutral-400 transition-colors resize-none"></textarea>
+                        </div>
+                        <button class="px-5 py-2.5 border border-neutral-800 text-white bg-black hover:border-white transition-colors uppercase tracking-widest text-xs font-bold">
+                            Transmit_Payload
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="border-t border-neutral-950 bg-black py-8 text-center text-xs text-neutral-600 uppercase tracking-widest mt-12">
@@ -304,12 +356,14 @@
             const emailAddress = "mharishworkcyber@gmail.com";
             navigator.clipboard.writeText(emailAddress).then(() => {
                 const textTarget = document.getElementById("email-text");
-                textTarget.textContent = "Address Copied!";
-                textTarget.style.color = "#ffffff";
+                const contactTextTarget = document.getElementById("contact-email-text");
+                
+                if(textTarget) textTarget.textContent = "Address Copied!";
+                if(contactTextTarget) contactTextTarget.textContent = "Address Copied!";
                 
                 setTimeout(() => {
-                    textTarget.textContent = "Email";
-                    textTarget.style.color = "";
+                    if(textTarget) { textTarget.textContent = "Email"; textTarget.style.color = ""; }
+                    if(contactTextTarget) { contactTextTarget.textContent = "Email ↗"; }
                 }, 2500);
             });
         }
@@ -333,7 +387,62 @@
                 currentButton.classList.add('active-tab');
                 currentButton.classList.remove('text-neutral-500');
             }
+
+            // Toggle Matrix Backdrop Animation Engine on Contact View State
+            const canvas = document.getElementById('matrix-canvas');
+            if (tabId === 'contact') {
+                canvas.style.display = 'block';
+                initMatrix();
+            } else {
+                if(canvas) canvas.style.display = 'none';
+            }
+
             window.scrollTo(0,0);
+        }
+
+        // Canvas Code Rain Animation Logic Loop
+        let matrixInterval = null;
+        function initMatrix() {
+            const canvas = document.getElementById('matrix-canvas');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            // Adjust canvas to bounding element properties
+            const parent = canvas.parentElement;
+            canvas.width = parent.offsetWidth;
+            canvas.height = parent.offsetHeight || 500;
+
+            const katakana = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEF';
+            const alphabet = katakana.split('');
+
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+
+            const rainDrops = [];
+            for (let x = 0; x < columns; x++) {
+                rainDrops[x] = 1;
+            }
+
+            const draw = () => {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#fff'; 
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < rainDrops.length; i++) {
+                    const text = alphabet[Math.floor(Math.random() * alphabet.length)];
+                    ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                    if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        rainDrops[i] = 0;
+                    }
+                    rainDrops[i]++;
+                }
+            };
+
+            if(matrixInterval) clearInterval(matrixInterval);
+            matrixInterval = setInterval(draw, 30);
         }
 
         // Name Header Switching Typer (Harish <-> Madara)
