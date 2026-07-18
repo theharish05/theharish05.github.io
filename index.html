@@ -7,13 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html { scroll-behavior: smooth; background-color: #000; }
-        body { background-color: #000; font-family: 'Courier New', Courier, monospace; color: #b5b5b5; line-height: 1.7; text-shadow: 0 0 1px rgba(0,0,0,1); }
+        body { background-color: #000; font-family: 'Courier New', Courier, monospace; color: #b5b5b5; line-height: 1.7; text-shadow: 0 0 1px rgba(0,0,0,1); overflow-x: hidden; }
         
         .link-hover { text-decoration: none; color: #a3a3a3; transition: all 0.2s ease-in-out; }
         .link-hover:hover { color: #ffffff; }
         .active-tab { color: #ffffff; font-weight: bold; border-bottom: 2px solid #fff; padding-bottom: 4px; }
         
-        /* Digital Background Grid */
+        /* Full-Page Aesthetic Digital Grid Backdrop */
         .digital-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
             background-image: 
@@ -62,13 +62,21 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col relative text-lg">
+<body class="min-h-screen flex flex-col relative text-lg select-none">
 
-    <!-- Subtle Digital Grid Background -->
+    <!-- Full Screen Digital Mesh Framework -->
     <div class="digital-bg"></div>
 
+    <!-- Aesthetic Left/Right Japanese Background Channels -->
+    <div class="fixed top-1/4 left-4 z-0 hidden lg:block opacity-[0.06] text-white text-sm font-bold font-mono tracking-widest [writing-mode:vertical-lr]">
+        サイバーセキュリティ // CYBER SECURITY
+    </div>
+    <div class="fixed top-1/4 right-4 z-0 hidden lg:block opacity-[0.06] text-white text-sm font-bold font-mono tracking-widest [writing-mode:vertical-lr]">
+        デブオプス // DEVELOPMENT OPERATIONS
+    </div>
+
     <!-- Minimal Header Nav Area -->
-    <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900">
+    <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900 relative z-50">
         <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
         <div class="flex gap-8 text-sm uppercase tracking-widest flex-wrap">
             <button onclick="switchTab('home')" id="nav-home" class="nav-btn active-tab transition-all">Home</button>
@@ -79,21 +87,27 @@
     </nav>
 
     <!-- Main Content Body -->
-    <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12">
+    <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12 relative z-30">
         
-        <!-- HOME SECTION -->
-        <section id="home" class="tab-content active space-y-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-widest uppercase mb-4">
+        <!-- HOME SECTION (Clean Center-Aligned Layout Over Full Grid) -->
+        <section id="home" class="tab-content active text-center flex flex-col items-center justify-center min-h-[50vh] space-y-8">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-widest uppercase">
                 <span id="name-typing"></span><span class="cursor-blink">_</span>
             </h1>
             
-            <p class="text-white text-xl font-semibold tracking-wide border-l-2 border-neutral-700 pl-4">
+            <p class="text-white text-xl sm:text-2xl font-semibold tracking-wide border-neutral-700 max-w-xl mx-auto">
                 &gt; <span id="role-typing"></span><span class="cursor-blink">|</span>
             </p>
             
-            <p class="text-neutral-300 text-lg max-w-3xl leading-relaxed">
+            <p class="text-neutral-400 text-lg max-w-2xl mx-auto leading-relaxed">
                 Cybersecurity undergraduate specializing in defensive and offensive security operations mixed with DevOps and cloud systems. Armed with hands-on foundations in network defense, vulnerability assessments, and CI/CD logging workflows, my background brings an essential layer of security awareness to everything I build—from testing architecture to provisioning automated cloud environments.
             </p>
+            
+            <!-- Quick Link Hub Centered -->
+            <div class="flex flex-wrap items-center justify-center gap-8 pt-4 text-base uppercase tracking-widest font-bold">
+                <a href="https://github.com/theharish05" target="_blank" class="link-hover text-white">[ GitHub ]</a>
+                <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover text-white">[ LinkedIn ]</a>
+            </div>
         </section>
 
         <!-- ABOUT & SKILLS SECTION -->
@@ -184,7 +198,7 @@
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Curriculum Vitae</h2>
                 <div class="grid grid-cols-1 gap-4 text-base font-mono">
-                    <a href="https://drive.google.com/file/d/1bOXD1II1mA2nYq8mO6kO9L4EPpL3pG3n/view?usp=sharing" target="_blank" class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center group">
+                    <a href="https://drive.google.com/file/d/1aCJcqw9rme4VGxbvWhZdXdSVt9pFAB3j/view?usp=sharing" target="_blank" class="interactive-card p-5 bg-neutral-950/40 rounded flex justify-between items-center group">
                         <span><strong class="text-white">VIEW FULL RESUME</strong> — Google Drive</span>
                         <span class="text-neutral-500 group-hover:text-white transition-colors">↗</span>
                     </a>
