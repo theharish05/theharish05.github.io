@@ -59,6 +59,7 @@
 
     <div class="digital-bg"></div>
 
+    <!-- Minimal Header Nav Area -->
     <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900">
         <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
         <div class="flex gap-8 text-sm uppercase tracking-widest">
@@ -68,8 +69,10 @@
         </div>
     </nav>
 
+    <!-- Main Content Body -->
     <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12">
         
+        <!-- HOME SECTION -->
         <section id="home" class="tab-content active space-y-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white tracking-widest uppercase mb-4">
                 <span id="name-typing"></span><span class="cursor-blink">_</span>
@@ -83,17 +86,20 @@
                 Cybersecurity undergraduate specializing in defensive and offensive security operations mixed with DevOps and cloud systems. Armed with hands-on foundations in network defense, vulnerability assessments, and CI/CD logging workflows, my background brings an essential layer of security awareness to everything I build—from testing architecture to provisioning automated cloud environments.
             </p>
             
+            <!-- Quick Link Hub -->
             <div class="flex flex-wrap items-center gap-6 pt-8 text-base uppercase tracking-widest font-bold">
                 <a href="https://github.com/theharish05" target="_blank" class="link-hover text-white">[ GitHub ]</a>
                 <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="link-hover text-white">[ LinkedIn ]</a>
                 <button onclick="copyEmailToClipboard()" class="link-hover text-white focus:outline-none">
-                    [ <span id="email-text">EMAIL</span> ]
+                    [ <span id="email-text">Email</span> ]
                 </button>
             </div>
         </section>
 
+        <!-- ABOUT & SKILLS SECTION -->
         <section id="about" class="tab-content space-y-14">
             
+            <!-- Internships Timeline -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Experience</h2>
                 <div class="grid grid-cols-1 gap-6">
@@ -116,6 +122,7 @@
                 </div>
             </div>
 
+            <!-- Competitive Wins -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Achievements & CTFs</h2>
                 <div class="grid grid-cols-1 gap-4 text-base font-mono">
@@ -133,9 +140,11 @@
                 </div>
             </div>
 
+            <!-- Technical Skills Matrix -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Technical Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base">
+                    <!-- Cyber Security Block -->
                     <div class="interactive-card bg-neutral-950/20 p-6 rounded-md space-y-3">
                         <h3 class="text-white font-bold uppercase tracking-wider text-sm border-b border-neutral-900 pb-2 mb-2">// Cybersecurity</h3>
                         <p><strong class="text-neutral-400">SOC & Monitoring:</strong> SIEM, Splunk - Basics, Wireshark, IDS, Alert Analysis.</p>
@@ -145,6 +154,7 @@
                         <p><strong class="text-neutral-400">Technologies/Framework:</strong> Linux, Git, MongoDB, VS Code.</p>
                     </div>
                     
+                    <!-- DevOps Block -->
                     <div class="interactive-card bg-neutral-950/20 p-6 rounded-md space-y-3 flex flex-col justify-start">
                         <h3 class="text-white font-bold uppercase tracking-wider text-sm border-b border-neutral-900 pb-2 mb-2">// DevOps & Cloud Architecture</h3>
                         <p><strong class="text-neutral-400">DevOps & CI/CD:</strong> Docker, Kubernetes (EKS/KinD), Helm, ArgoCD (GitOps), Jenkins, GitHub Actions, Ansible.</p>
@@ -154,6 +164,7 @@
                 </div>
             </div>
 
+            <!-- Verified Credentials Portfolio Section -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Certifications</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-mono">
@@ -161,7 +172,7 @@
                     <a href="https://drive.google.com/file/d/1V7nyruiw74SRL4wNyCk6mHq-p2pX0tPK/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ LetsDefend Malware Analysis ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1TP7h2S2HVVJLUk2e8WivdYahyCR3h_RD/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical Ethical Hacking ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1ULZd4ld78YxOmB0gX2xS4a20m0dg5iHD/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical Bug Bounty ]</span> <span>↗</span></a>
-                    <a href="https://drive.google.com/file/d/1GoVOKO_U61S7BuMJRJrnBpR0GCQ1uiiV/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical Web Hacking ]</span> <span>↗</span></a>
+                    <a href="https://drive.google.com/file/d/1GoVOKO_U61S7BuMJRJrnBpR00GCQ1uiiV/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical Web Hacking ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1yU2A26wr1fPcIg-ZE44sT0-z1SesW0zz/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Practical API Hacking ]</span> <span>↗</span></a>
                     <a href="https://www.linkedin.com/posts/m-harish-318068286_cybersecurity-isc2-professionaldevelopment-activity-7246134310653583360-A20P" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ ISC2 Certification ]</span> <span>↗</span></a>
                     <a href="https://drive.google.com/file/d/1VbY8RAtR__87cjWFmYWrU0jxwEzL7SNk/view?usp=sharing" target="_blank" class="interactive-card bg-neutral-950/30 p-5 rounded-md flex justify-between items-center"><span>[ TCM Python 101 for Hackers ]</span> <span>↗</span></a>
@@ -169,6 +180,7 @@
                 </div>
             </div>
 
+            <!-- Professional Resume Section -->
             <div class="space-y-6">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Curriculum Vitae</h2>
                 <div class="grid grid-cols-1 gap-4 text-base font-mono">
@@ -181,11 +193,25 @@
 
         </section>
 
+        <!-- PROJECTS SECTION -->
         <section id="projects" class="tab-content space-y-10">
             
             <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Engineering & Architecture</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Proj 6: GitOps Microservices (New Integration) -->
+                <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// GitOps_Platform_Engineering</div>
+                        <h3 class="text-xl font-bold text-white">
+                            <a href="https://github.com/theharish05/GitOps-Driven-Microservices-Architecture-on-AWS-EKS" target="_blank" class="hover:underline">E-Commerce Microservices Architecture via GitOps ↗</a>
+                        </h3>
+                        <p class="text-sm text-neutral-400 mt-2">Architected a 12-component microservices e-commerce application on AWS EKS, provisioning the cluster and compute nodes via eksctl[cite: 3]. Built a zero-touch GitOps pipeline using ArgoCD and Helm for automated continuous deployment and strict state synchronization[cite: 3]. Configured AWS ALB for dynamic internet-facing Ingress routing and resolved StatefulSet storage constraints using the EBS CSI driver and custom gp3 StorageClasses[cite: 3].</p>
+                    </div>
+                    <p class="text-xs font-mono text-neutral-600 mt-4">AWS (EKS, ALB, EBS, EC2, IAM), Kubernetes, ArgoCD, Helm, Microservices[cite: 3]</p>
+                </div>
+
+                <!-- Proj 1 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Network_Defense</div>
@@ -197,6 +223,7 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Scapy, PySide6</p>
                 </div>
 
+                <!-- Proj 2 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Assessment_Eng</div>
@@ -208,6 +235,7 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Python, PySide6, Nmap, Requests</p>
                 </div>
 
+                <!-- Proj 3 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Pipeline_Security</div>
@@ -219,6 +247,7 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Python, Flask, Jenkins, Docker</p>
                 </div>
 
+                <!-- Proj 4 -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Clouds_IaC</div>
@@ -230,6 +259,7 @@
                     <p class="text-xs font-mono text-neutral-600 mt-4">Terraform, AWS (EC2, S3, VPC)</p>
                 </div>
 
+                <!-- Proj 5 Cluster -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Bare_Metal_Hardware</span>
@@ -249,6 +279,7 @@
                     </div>
                 </div>
 
+                <!-- Proj 7 Infrastructure -->
                 <div class="interactive-card bg-neutral-950/30 p-6 rounded-md md:col-span-2 flex flex-col justify-between">
                     <div class="space-y-2">
                         <div class="text-xs font-mono text-neutral-500 uppercase tracking-widest">// Enterprise_Isolation_Segmentation</div>
