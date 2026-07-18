@@ -29,10 +29,9 @@
         }
         .contact-relative { position: relative; overflow: hidden; }
 
-        /* Animations */
-        .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        /* Multi-Page Simulation Animations */
+        .tab-content { display: none; opacity: 0; transform: translateY(12px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .tab-content.active { display: block; opacity: 1; transform: translateY(0); }
         
         .cursor-blink { animation: blink 1s infinite; color: #fff; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
@@ -76,7 +75,7 @@
     </div>
 
     <!-- Minimal Header Nav Area -->
-    <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900 relative z-50">
+    <nav class="w-full max-w-4xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-neutral-900 relative z-50 bg-black/50 backdrop-blur-sm">
         <button onclick="switchTab('home')" class="text-white font-bold tracking-widest text-xl hover:text-neutral-400 transition-colors">~/madara</button>
         <div class="flex gap-8 text-sm uppercase tracking-widest flex-wrap">
             <button onclick="switchTab('home')" id="nav-home" class="nav-btn active-tab transition-all">Home</button>
@@ -90,7 +89,7 @@
     <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12 relative z-30">
         
         <!-- HOME SECTION (Clean Center-Aligned Layout Over Full Grid) -->
-        <section id="home" class="tab-content active text-center flex flex-col items-center justify-center min-h-[50vh] space-y-8">
+        <section id="home" class="tab-content active text-center flex flex-col items-center justify-center min-h-[55vh] space-y-8">
             <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-widest uppercase">
                 <span id="name-typing"></span><span class="cursor-blink">_</span>
             </h1>
@@ -310,57 +309,32 @@
         <section id="contact" class="tab-content space-y-10 contact-relative">
             <canvas id="matrix-canvas"></canvas>
             
-            <div class="relative z-10 space-y-8">
+            <div class="relative z-10 space-y-8 max-w-2xl mx-auto text-center py-10">
                 <h2 class="text-2xl font-bold text-white uppercase tracking-widest border-b border-neutral-800 pb-3">Secure Communications Link</h2>
                 
-                <!-- Communication Link Cards Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono">
-                    <a href="https://github.com/theharish05" target="_blank" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-start group">
-                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-2">// Source_Code</span>
-                        <span class="text-white font-bold text-lg group-hover:underline">GitHub ↗</span>
+                <!-- Communication Link Cards Grid (Centered layout with zero arrow indices) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono pt-4">
+                    <a href="https://github.com/theharish05" target="_blank" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-center group">
+                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-3">// Source_Code</span>
+                        <span class="text-white font-bold text-lg group-hover:underline">GitHub</span>
                     </a>
                     
-                    <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-start group">
-                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-2">// Professional_Net</span>
-                        <span class="text-white font-bold text-lg group-hover:underline">LinkedIn ↗</span>
+                    <a href="https://linkedin.com/in/m-harish-318068286/" target="_blank" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-center group">
+                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-3">// Professional_Net</span>
+                        <span class="text-white font-bold text-lg group-hover:underline">LinkedIn</span>
                     </a>
                     
-                    <button onclick="copyEmailToClipboard()" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-start group text-left w-full focus:outline-none">
-                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-2">// Direct_Mail</span>
-                        <span id="contact-email-text" class="text-white font-bold text-lg group-hover:underline">Email ↗</span>
+                    <button onclick="copyEmailToClipboard()" class="interactive-card p-6 bg-neutral-950/40 rounded-md flex flex-col justify-between items-center group text-center w-full focus:outline-none">
+                        <span class="text-xs text-neutral-500 uppercase tracking-widest mb-3">// Direct_Mail</span>
+                        <span id="contact-email-text" class="text-white font-bold text-lg group-hover:underline">Email</span>
                     </button>
-                </div>
-
-                <!-- Interactive Terminal Message Console -->
-                <div class="border border-neutral-900 bg-neutral-950/60 rounded-md p-6 font-mono text-sm space-y-4 shadow-xl">
-                    <div class="flex items-center justify-between text-neutral-500 text-xs uppercase border-b border-neutral-900 pb-2">
-                        <span>Terminal Message Console v1.0.4</span>
-                        <span class="text-emerald-500">Ready_</span>
-                    </div>
-                    <div class="space-y-2">
-                        <p class="text-neutral-400">guest@madara-ops:~$ <span class="text-white">sendmail --init</span></p>
-                        <p class="text-neutral-500">Initializing message tunnel variables...</p>
-                    </div>
-                    <div class="space-y-3 pt-2">
-                        <div>
-                            <label class="block text-neutral-400 mb-1">Return_Path (Your Email):</label>
-                            <input type="email" placeholder="anonymous@domain.xyz" class="w-full bg-black border border-neutral-800 rounded px-3 py-2 text-white focus:outline-none focus:border-neutral-400 transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-neutral-400 mb-1">Payload_Data (Your Message):</label>
-                            <textarea rows="4" placeholder="Enter secure transmission payload..." class="w-full bg-black border border-neutral-800 rounded px-3 py-2 text-white focus:outline-none focus:border-neutral-400 transition-colors resize-none"></textarea>
-                        </div>
-                        <button class="px-5 py-2.5 border border-neutral-800 text-white bg-black hover:border-white transition-colors uppercase tracking-widest text-xs font-bold">
-                            Transmit_Payload
-                        </button>
-                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="border-t border-neutral-950 bg-black py-8 text-center text-xs text-neutral-600 uppercase tracking-widest mt-12">
+    <footer class="border-t border-neutral-950 bg-black py-8 text-center text-xs text-neutral-600 uppercase tracking-widest mt-12 relative z-50">
         &copy; 2026 Madara. Core metrics active.
     </footer>
 
@@ -377,18 +351,27 @@
                 
                 setTimeout(() => {
                     if(textTarget) { textTarget.textContent = "Email"; textTarget.style.color = ""; }
-                    if(contactTextTarget) { contactTextTarget.textContent = "Email ↗"; }
+                    if(contactTextTarget) { contactTextTarget.textContent = "Email"; }
                 }, 2500);
             });
         }
 
-        // Section Tab Management
+        // Section Tab Management - Refined to emulate clean standalone pages
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(c => c.classList.remove('active'));
+            
+            // Clean up old active screens immediately
+            contents.forEach(c => {
+                c.classList.remove('active');
+                c.style.opacity = "0";
+            });
             
             const selectedContent = document.getElementById(tabId);
-            if (selectedContent) selectedContent.classList.add('active');
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+                // Tiny buffer trace to trigger native standard window CSS opacity frames smoothly
+                setTimeout(() => { selectedContent.style.opacity = "1"; }, 50);
+            }
 
             const navButtons = document.querySelectorAll('.nav-btn');
             navButtons.forEach(btn => {
@@ -405,10 +388,13 @@
             // Toggle Matrix Backdrop Animation Engine on Contact View State
             const canvas = document.getElementById('matrix-canvas');
             if (tabId === 'contact') {
-                canvas.style.display = 'block';
-                initMatrix();
+                if(canvas) {
+                    canvas.style.display = 'block';
+                    initMatrix();
+                }
             } else {
                 if(canvas) canvas.style.display = 'none';
+                if(matrixInterval) clearInterval(matrixInterval);
             }
 
             window.scrollTo(0,0);
@@ -421,7 +407,6 @@
             if(!canvas) return;
             const ctx = canvas.getContext('2d');
             
-            // Adjust canvas to bounding element properties
             const parent = canvas.parentElement;
             canvas.width = parent.offsetWidth;
             canvas.height = parent.offsetHeight || 500;
